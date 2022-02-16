@@ -1,0 +1,58 @@
+/*   320px —  480px: Mobile devices
+     481px —  768px: iPads, Tablets
+     769px — 1024px: Small screens, laptops
+    1025px — 1200px: Desktops, large screens */
+
+$pbBodyMain: #ee6666;
+$pbBodyMiddle: #a33232;
+$pbBodyDark: #751515;
+
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  @mixin roundCorners($radius: 20px) {
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+  }
+  
+  .pdContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .pbBodyUpper {
+    @include roundCorners($radius: 4vw);
+    position: absolute;
+    background-color: $pbBodyMain;
+    height: 45vw;
+    width: 80vw;
+    transform: translateY(-50%);
+  }
+  
+  .pbBodyLowerDark {
+    position: absolute;
+    height: 53vw;
+    width: 82vw;
+    background-color: $pbBodyDark;
+    transform: translateY(30%);
+  }
+
+  .pbBodyLowerMiddle {
+    position: absolute;
+    background-color: $pbBodyMiddle;
+    height: 53vw;
+    width: 80vw;
+    transform: translateY(30%);
+  }
+
+  .pbBodyLower {
+    @include roundCorners($radius: 4vw);
+    position: absolute;
+    background-color: $pbBodyMain;
+    height: 53vw;
+    width: 95vw;
+    transform: translateY(30%);
+  }
+}

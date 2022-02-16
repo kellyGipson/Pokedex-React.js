@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&family=VT323&display=swap');
+
+$bgcolor: #404040;
+$textcolor: #ddd;
+
+* {
+  font-family: 'Courier Prime', 'vt323';
+  color: $textcolor;
+  background-color: $bgcolor;
+}
