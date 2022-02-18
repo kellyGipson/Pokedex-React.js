@@ -6,5 +6,11 @@ $textcolor: #ddd;
 * {
   font-family: 'Courier Prime', 'vt323';
   color: $textcolor;
+}
+
+.App {
   background-color: $bgcolor;
+  position: relative;
+  height: 100vh;
+  z-index: -200;
 }

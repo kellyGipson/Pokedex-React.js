@@ -2,7 +2,13 @@
 * {
   font-family: "Courier Prime", "vt323";
   color: #ddd;
+}
+
+.App {
   background-color: #404040;
+  position: relative;
+  height: 100vh;
+  z-index: -200;
 }
 
 /*# sourceMappingURL=App.css.map */

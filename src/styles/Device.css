@@ -3,86 +3,87 @@
      481px —  768px: iPads, Tablets
      769px — 1024px: Small screens, laptops
     1025px — 1200px: Desktops, large screens */
-@media only screen and (min-width: 280px) and (max-width: 840px) {
-  .pdContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+.pdContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: -100;
+}
 
-  .pd {
-    position: absolute;
-  }
+.pd {
+  position: absolute;
+}
 
-  .pdBodyUpper, .pdBodyLower {
-    border-top-left-radius: 4vw;
-    border-top-right-radius: 4vw;
-    border-bottom-left-radius: 4vw;
-    border-bottom-right-radius: 4vw;
-    background-color: #ee6666;
-  }
+.pdBodyUpper, .pdBodyLower {
+  border-top-left-radius: 4vw;
+  border-top-right-radius: 4vw;
+  border-bottom-left-radius: 4vw;
+  border-bottom-right-radius: 4vw;
+  background-color: #ee6666;
+}
 
-  .pdBodyUpper {
-    height: 45vw;
-    width: 80vw;
-    transform: translateY(-50%);
-  }
+.pdBodyUpper {
+  height: 45vw;
+  width: 80vw;
+  transform: translateY(-50%);
+}
 
-  .pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
-    height: 53vw;
-    transform: translateY(30%);
-  }
+.pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
+  height: 53vw;
+  transform: translateY(30%);
+}
 
-  .pdBodyLower {
-    width: 95vw;
-  }
+.pdBodyLower {
+  width: 95vw;
+}
 
-  .pdBodyLowerDark {
-    width: 82vw;
-    background-color: #751515;
-  }
+.pdBodyLowerDark {
+  width: 82vw;
+  background-color: #751515;
+}
 
-  .pdBodyLowerMiddle {
-    width: 80vw;
-    background-color: #a33232;
-  }
+.pdBodyLowerMiddle {
+  width: 80vw;
+  background-color: #a33232;
+}
 
-  .pdBezelUpper, .pdBezelLower {
-    border-top-left-radius: 3vw;
-    border-top-right-radius: 3vw;
-    border-bottom-left-radius: 3vw;
-    border-bottom-right-radius: 3vw;
-    height: 40vw;
-    width: 78vw;
-    background-color: #333;
-  }
+.pdBezelUpper, .pdBezelLower {
+  border-top-left-radius: 3vw;
+  border-top-right-radius: 3vw;
+  border-bottom-left-radius: 3vw;
+  border-bottom-right-radius: 3vw;
+  height: 40vw;
+  width: 78vw;
+  background-color: #333;
+}
 
-  .pdBezelUpper {
-    transform: translateY(-57%);
-  }
+.pdBezelUpper {
+  transform: translateY(-57%);
+}
 
-  .pdBezelLower {
-    transform: translateY(50%);
-  }
+.pdBezelLower {
+  transform: translateY(50%);
+}
 
-  .pdScreenUpper, .pdScreenLower {
-    border-top-left-radius: 2vw;
-    border-top-right-radius: 2vw;
-    border-bottom-left-radius: 2vw;
-    border-bottom-right-radius: 2vw;
-    height: 35vw;
-    width: 70vw;
-    background-color: #444;
-  }
+.pdScreenUpper, .pdScreenLower {
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
+  border-bottom-left-radius: 2vw;
+  border-bottom-right-radius: 2vw;
+  height: 35vw;
+  width: 70vw;
+  background-color: #444;
+}
 
-  .pdScreenUpper {
-    transform: translateY(-65%);
-  }
+.pdScreenUpper {
+  transform: translateY(-65%);
+}
 
-  .pdScreenLower {
-    transform: translateY(58%);
-  }
+.pdScreenLower {
+  transform: translateY(58%);
 }
 
 /*# sourceMappingURL=Device.css.map */

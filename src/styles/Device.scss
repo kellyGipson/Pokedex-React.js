@@ -9,24 +9,28 @@ $pbBodyDark: #751515;
 $pbBezel: #333;
 $pbScreen: #444;
 
-@media only screen and (min-width: 280px) and (max-width: 840px) {
-  @mixin roundCorners($radius: 20px) {
-    border-top-left-radius: $radius;
-    border-top-right-radius: $radius;
-    border-bottom-left-radius: $radius;
-    border-bottom-right-radius: $radius;
-  }
+@mixin roundCorners($radius: 20px) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
 
-  @mixin heightWidth($height, $width) {
-    height: $height;
-    width: $width;
-  }
+@mixin heightWidth($height, $width) {
+  height: $height;
+  width: $width;
+}
+
+// @media only screen and (min-width: 280px) and (max-width: 840px) {
 
   .pdContainer {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    z-index: -100;
   }
   
   .pd {
@@ -90,4 +94,4 @@ $pbScreen: #444;
     transform: translateY(58%);
   }
 
-}
+// }

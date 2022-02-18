@@ -8,6 +8,7 @@ function App() {
   return (
     <div className="App">
       <Device />
+      <div>{`${window.screen.height} by ${window.screen.width}`}</div>
     </div>
   );
 }
