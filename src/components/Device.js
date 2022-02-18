@@ -7,10 +7,14 @@ const react_1 = __importDefault(require("react"));
 require("../styles/Device.css");
 const Device = () => {
     return (react_1.default.createElement("div", { className: "pdContainer" },
-        react_1.default.createElement("div", { className: 'pbBodyLower' }),
-        react_1.default.createElement("div", { className: 'pbBodyLowerDark' }),
-        react_1.default.createElement("div", { className: 'pbBodyLowerMiddle' }),
-        react_1.default.createElement("div", { className: 'pbBodyUpper' }),
-        react_1.default.createElement("div", { className: 'pbBodyUpper' })));
+        react_1.default.createElement("div", { className: 'pd pdBodyLower' }),
+        react_1.default.createElement("div", { className: 'pd pdBodyLowerDark' }),
+        react_1.default.createElement("div", { className: 'pd pdBodyLowerMiddle' }),
+        react_1.default.createElement("div", { className: "pd pdBezelLower" }),
+        react_1.default.createElement("div", { className: "pd pdScreenLower" }),
+        react_1.default.createElement("div", { className: 'pd pdBodyUpper' }),
+        react_1.default.createElement("div", { className: 'pd pdBodyUpper' }),
+        react_1.default.createElement("div", { className: "pd pdBezelUpper" }),
+        react_1.default.createElement("div", { className: "pd pdScreenUpper" })));
 };
 exports.default = Device;

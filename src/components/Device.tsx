@@ -5,11 +5,15 @@ import '../styles/Device.css'
 const Device = () => {
   return (
     <div className="pdContainer">
-      <div className='pbBodyLower'></div>
-      <div className='pbBodyLowerDark'></div>
-      <div className='pbBodyLowerMiddle'></div>
-      <div className='pbBodyUpper'></div>
-      <div className='pbBodyUpper'></div>
+      <div className='pd pdBodyLower'></div>
+      <div className='pd pdBodyLowerDark'></div>
+      <div className='pd pdBodyLowerMiddle'></div>
+      <div className="pd pdBezelLower"></div>
+      <div className="pd pdScreenLower"></div>
+      <div className='pd pdBodyUpper'></div>
+      <div className='pd pdBodyUpper'></div>
+      <div className="pd pdBezelUpper"></div>
+      <div className="pd pdScreenUpper"></div>
     </div>
   )
 }

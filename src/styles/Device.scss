@@ -6,53 +6,88 @@
 $pbBodyMain: #ee6666;
 $pbBodyMiddle: #a33232;
 $pbBodyDark: #751515;
+$pbBezel: #333;
+$pbScreen: #444;
 
-@media only screen and (min-width: 320px) and (max-width: 480px) {
+@media only screen and (min-width: 280px) and (max-width: 840px) {
   @mixin roundCorners($radius: 20px) {
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
   }
-  
+
+  @mixin heightWidth($height, $width) {
+    height: $height;
+    width: $width;
+  }
+
   .pdContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
-
-  .pbBodyUpper {
-    @include roundCorners($radius: 4vw);
+  
+  .pd {
     position: absolute;
+  }
+
+  .pdBodyUpper, .pdBodyLower {
+    @include roundCorners($radius: 4vw);
     background-color: $pbBodyMain;
-    height: 45vw;
-    width: 80vw;
+  }
+  
+  .pdBodyUpper {
+    @include heightWidth(45vw, 80vw);
     transform: translateY(-50%);
   }
   
-  .pbBodyLowerDark {
-    position: absolute;
+  .pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
     height: 53vw;
+    transform: translateY(30%);
+  }
+
+  .pdBodyLower {
+    width: 95vw;
+  }
+
+  .pdBodyLowerDark {
     width: 82vw;
     background-color: $pbBodyDark;
-    transform: translateY(30%);
   }
 
-  .pbBodyLowerMiddle {
-    position: absolute;
-    background-color: $pbBodyMiddle;
-    height: 53vw;
+  .pdBodyLowerMiddle {
     width: 80vw;
-    transform: translateY(30%);
+    background-color: $pbBodyMiddle;
   }
 
-  .pbBodyLower {
-    @include roundCorners($radius: 4vw);
-    position: absolute;
-    background-color: $pbBodyMain;
-    height: 53vw;
-    width: 95vw;
-    transform: translateY(30%);
+  .pdBezelUpper, .pdBezelLower {
+    @include roundCorners($radius: 3vw);
+    @include heightWidth(40vw, 78vw);
+    background-color: $pbBezel;
   }
+
+  .pdBezelUpper {
+    transform: translateY(-57%);
+  }
+  
+  .pdBezelLower {
+    transform: translateY(50%);
+  }
+
+  .pdScreenUpper, .pdScreenLower {
+    @include roundCorners($radius: 2vw);
+    @include heightWidth(35vw, 70vw);
+    background-color: $pbScreen;
+  }
+
+  .pdScreenUpper {
+    transform: translateY(-65%);
+  }
+
+  .pdScreenLower {
+    transform: translateY(58%);
+  }
+
 }
