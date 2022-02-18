@@ -3,6 +3,56 @@
      481px —  768px: iPads, Tablets
      769px — 1024px: Small screens, laptops
     1025px — 1200px: Desktops, large screens */
+@media only screen and (min-width: 280px) and (max-width: 840px) {
+  .pdBodyUpper {
+    height: 45vw;
+    width: 80vw;
+    transform: translateY(-50%);
+  }
+
+  .pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
+    height: 53vw;
+    transform: translateY(30%);
+  }
+
+  .pdBodyLower {
+    width: 95vw;
+  }
+
+  .pdBodyLowerDark {
+    width: 82vw;
+  }
+
+  .pdBodyLowerMiddle {
+    width: 80vw;
+  }
+
+  .pdBezelUpper, .pdBezelLower {
+    height: 40vw;
+    width: 78vw;
+  }
+
+  .pdScreenUpper, .pdScreenLower {
+    height: 35vw;
+    width: 70vw;
+  }
+
+  .pdBezelUpper {
+    transform: translateY(-57%);
+  }
+
+  .pdBezelLower {
+    transform: translateY(50%);
+  }
+
+  .pdScreenUpper {
+    transform: translateY(-65%);
+  }
+
+  .pdScreenLower {
+    transform: translateY(58%);
+  }
+}
 .pdContainer {
   position: absolute;
   display: flex;
@@ -25,28 +75,11 @@
   background-color: #ee6666;
 }
 
-.pdBodyUpper {
-  height: 45vw;
-  width: 80vw;
-  transform: translateY(-50%);
-}
-
-.pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
-  height: 53vw;
-  transform: translateY(30%);
-}
-
-.pdBodyLower {
-  width: 95vw;
-}
-
 .pdBodyLowerDark {
-  width: 82vw;
   background-color: #751515;
 }
 
 .pdBodyLowerMiddle {
-  width: 80vw;
   background-color: #a33232;
 }
 
@@ -55,17 +88,7 @@
   border-top-right-radius: 3vw;
   border-bottom-left-radius: 3vw;
   border-bottom-right-radius: 3vw;
-  height: 40vw;
-  width: 78vw;
   background-color: #333;
-}
-
-.pdBezelUpper {
-  transform: translateY(-57%);
-}
-
-.pdBezelLower {
-  transform: translateY(50%);
 }
 
 .pdScreenUpper, .pdScreenLower {
@@ -73,17 +96,7 @@
   border-top-right-radius: 2vw;
   border-bottom-left-radius: 2vw;
   border-bottom-right-radius: 2vw;
-  height: 35vw;
-  width: 70vw;
   background-color: #444;
-}
-
-.pdScreenUpper {
-  transform: translateY(-65%);
-}
-
-.pdScreenLower {
-  transform: translateY(58%);
 }
 
 /*# sourceMappingURL=Device.css.map */
