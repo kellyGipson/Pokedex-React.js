@@ -4,20 +4,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
+const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
 require("../styles/Device.css");
 const Device = () => {
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
     return (<div className="pdContainer">
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLowerDark'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLowerMiddle'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBezelLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdScreenLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBezelUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdScreenUpper'}></div>
+      <div className={'pd pdBodyLower pdBodyLower' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBodyLowerDark pdBodyLowerDark' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBezelLower pdBezelLower' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdScreenLower pdScreenLower' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBodyUpper pdBodyUpper' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBezelUpper pdBezelUpper' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdScreenUpper pdScreenUpper' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
     </div>);
 };
 exports.default = Device;

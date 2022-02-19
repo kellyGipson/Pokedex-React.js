@@ -1,23 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import useIsMobile from '../hooks/getIsMobile'
 
 import '../styles/Device.css'
 
 
 const Device = () => {
-  const screenWidth: number = window.screen.width
-  const screenHeight: number = window.screen.height
-
   return (
     <div className="pdContainer">
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLowerDark'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyLowerMiddle'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBezelLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdScreenLower'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBodyUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdBezelUpper'}></div>
-      <div className={(screenWidth < screenHeight) ? "vert" : "hori" + ' pd pdScreenUpper'}></div>
+      <div className={'pd pdBodyLower pdBodyLower'        + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBodyLowerDark pdBodyLowerDark'+ (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBezelLower pdBezelLower'      + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdScreenLower pdScreenLower'    + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBodyUpper pdBodyUpper'        + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdBezelUpper pdBezelUpper'      + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdScreenUpper pdScreenUpper'    + (useIsMobile() ? "Vert" : "Hori")}></div>
     </div>
   )
 }

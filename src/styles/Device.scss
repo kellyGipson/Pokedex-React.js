@@ -3,11 +3,10 @@
      769px — 1024px: Small screens, laptops
     1025px — 1200px: Desktops, large screens */
 
-$pbBodyMain: #ee6666;
-$pbBodyMiddle: #a33232;
-$pbBodyDark: #751515;
-$pbBezel: #333;
-$pbScreen: #444;
+$pbBodyMain: #a13333;
+$pbBodyDark: #af3535;
+$pbBezel: rgb(46, 46, 46);
+$pbScreen: rgb(36, 36, 36);
 
 @mixin roundCorners($radius: 20px) {
   border-top-left-radius: $radius;
@@ -21,55 +20,152 @@ $pbScreen: #444;
   width: $width;
 }
 
-@media only screen and (min-width: 280px) and (max-width: 840px) {
-  .pdBodyUpper {
-    @include heightWidth(45vw, 80vw);
-    transform: translateY(-50%);
-  }
-  
-  .pdBodyLower, .pdBodyLowerDark, .pdBodyLowerMiddle {
-    height: 53vw;
-    transform: translateY(30%);
-  }
-  
-  .pdBodyLower {
-    width: 95vw;
-  }
-  
-  .pdBodyLowerDark {
-    width: 82vw;
-  }
-  
-  .pdBodyLowerMiddle {
-    width: 80vw;
-  }
-  
-  .pdBezelUpper, .pdBezelLower {
-    @include heightWidth(40vw, 78vw);
-  }
+//============Vertical===========
 
-  .pdScreenUpper, .pdScreenLower {
-    @include heightWidth(35vw, 70vw);
-  }
-  
-  .pdBezelUpper {
-    transform: translateY(-57%);
-  }
-  
-  .pdBezelLower {
-    transform: translateY(50%);
-  }
-  
-  .pdScreenUpper {
-    transform: translateY(-65%);
-  }
-  
-  .pdScreenLower {
-    transform: translateY(58%);
-  }
-  
+.pdScreenUpperVert{
+  @include heightWidth(35vw, 70vw);
+  @include roundCorners($radius: 2vw);
+  transform: translateY(-65%);
 }
-  
+
+.pdBezelUpperVert{
+  @include heightWidth(40vw, 78vw);
+  @include roundCorners($radius: 3vw);
+  transform: translateY(-57%);
+}
+
+.pdBodyUpperVert{
+  @include heightWidth(45vw, 80vw);
+  @include roundCorners($radius: 4vw);
+  transform: translateY(-50%);
+}
+
+.pdScreenLowerVert{
+  @include heightWidth(35vw, 70vw);
+  @include roundCorners($radius: 2vw);
+  transform: translateY(58%);
+}
+
+.pdBezelLowerVert{
+  @include heightWidth(40vw, 78vw);
+  @include roundCorners($radius: 3vw);
+  transform: translateY(50%);
+}
+
+.pdBodyLowerDarkVert{
+  width: 81vw;
+  height: 53vw;
+  transform: translateY(30%);
+}
+
+.pdBodyLowerVert{
+  @include roundCorners($radius: 4vw);
+  width: 95vw;
+  height: 53vw;
+  transform: translateY(30%);
+}
+
+.pdScreenUpperVert, .pdScreenLowerVert {
+  box-shadow: 
+    inset 0.25vw 0.25vw 1vw rgba(0, 0, 0, 0.30), 
+    inset -0.25vw -0.25vw 1vw rgba(0, 0, 0, 0.30);
+}
+
+.pdBodyLowerVert, .pdBodyUpperVert {
+  box-shadow: 
+    inset 0.5vw 0.5vw 1vw rgba(255, 255, 255, 0.30), 
+    inset -0.5vw -0.5vw 1vw rgba(0, 0, 0, 0.40);
+}
+
+.pdBodyLowerDarkVert {
+  box-shadow: 
+  inset -0.5vw -0.5vw 2vw rgba(0, 0, 0, 0.50), 
+  inset  0.5vw  0.5vw 2vw rgba(0, 0, 0, 0.50);
+}
+
+.pdBezelUpperVert, .pdBezelLowerVert {
+  box-shadow: 
+    inset  0.05vw  0.05vw 0.5vw rgba(255, 255, 255, 0.30), 
+    inset -0.05vw -0.05vw 0.5vw rgba(0, 0, 0, 0.30),
+     0.05vw  0.05vw 0.5vw rgba(255, 255, 255, 0.30), 
+    -0.05vw -0.05vw 0.5vw rgba(0, 0, 0, 0.30);
+}
+
+//============End-Vertical===========
+//============Horizontal=============
+
+.pdScreenUpperHori{
+  @include heightWidth(35vh, 70vh);
+  @include roundCorners($radius: 2vh);
+  transform: translateY(-65%);
+}
+
+.pdBezelUpperHori{
+  @include heightWidth(40vh, 78vh);
+  @include roundCorners($radius: 3vh);
+  transform: translateY(-57%);
+}
+
+.pdBodyUpperHori{
+  @include heightWidth(45vh, 80vh);
+  @include roundCorners($radius: 4vh);
+  transform: translateY(-50%);
+}
+
+.pdScreenLowerHori{
+  @include heightWidth(35vh, 70vh);
+  @include roundCorners($radius: 2vh);
+  transform: translateY(58%);
+}
+
+.pdBezelLowerHori{
+  @include heightWidth(40vh, 78vh);
+  @include roundCorners($radius: 3vh);
+  transform: translateY(50%);
+}
+
+.pdBodyLowerDarkHori{
+  width: 81vh;
+  height: 53vh;
+  transform: translateY(30%);
+}
+
+.pdBodyLowerHori{
+  @include roundCorners($radius: 4vh);
+  width: 95vh;
+  height: 53vh;
+  transform: translateY(30%);
+}
+
+.pdScreenUpperHori, .pdScreenLowerHori {
+  box-shadow: 
+    inset 0.25vh 0.25vh 1vh rgba(0, 0, 0, 0.30), 
+    inset -0.25vh -0.25vh 1vh rgba(0, 0, 0, 0.30);
+}
+
+.pdBodyLowerHori, .pdBodyUpperHori {
+  box-shadow: 
+    inset 0.5vh 0.5vh 1vh rgba(255, 255, 255, 0.30), 
+    inset -0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.40);
+}
+
+.pdBodyLowerDarkHori {
+  box-shadow: 
+  inset -0.5vh -0.5vh 2vh rgba(0, 0, 0, 0.50), 
+  inset  0.5vh  0.5vh 2vh rgba(0, 0, 0, 0.50);
+}
+
+.pdBezelUpperHori, .pdBezelLowerHori {
+  box-shadow: 
+    inset  0.05vh  0.05vh 0.5vh rgba(255, 255, 255, 0.30), 
+    inset -0.05vh -0.05vh 0.5vh rgba(0, 0, 0, 0.30),
+     0.05vh  0.05vh 0.5vh rgba(255, 255, 255, 0.30), 
+    -0.05vh -0.05vh 0.5vh rgba(0, 0, 0, 0.30);
+}
+
+//============End-Horizontal=============
+
+//============Styles-for-both============
 .pdContainer {
   position: absolute;
   display: flex;
@@ -85,7 +181,6 @@ $pbScreen: #444;
 }
 
 .pdBodyUpper, .pdBodyLower {
-  @include roundCorners($radius: 4vw);
   background-color: $pbBodyMain;
 }
 
@@ -93,17 +188,10 @@ $pbScreen: #444;
   background-color: $pbBodyDark;
 }
 
-.pdBodyLowerMiddle {
-  background-color: $pbBodyMiddle;
-}
-
 .pdBezelUpper, .pdBezelLower {
-  @include roundCorners($radius: 3vw);
   background-color: $pbBezel;
 }
 
 .pdScreenUpper, .pdScreenLower {
-  @include roundCorners($radius: 2vw);
   background-color: $pbScreen;
 }
-  

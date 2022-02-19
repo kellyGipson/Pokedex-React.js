@@ -9,7 +9,6 @@ const Device_1 = __importDefault(require("./components/Device"));
 function App() {
     return (<div className="App">
       <Device_1.default />
-      <div>{`${window.screen.height} by ${window.screen.width}`}</div>
     </div>);
 }
 exports.default = App;
