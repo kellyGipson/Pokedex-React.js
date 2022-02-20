@@ -1,0 +1,42 @@
+.screenContainer {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.topScreenVert {
+  border: 1px solid white;
+  font-size: 3vw;
+  width: 69vw;
+  height: 34vw;
+  transform: translateY(-5.6vw);
+}
+
+.topScreenHori {
+  border: 1px solid white;
+  font-size: 3vh;
+  width: 69vh;
+  height: 34vh;
+  transform: translateY(-5.6vh);
+}
+
+.bottomScreenVert {
+  border: 1px solid white;
+  font-size: 3vw;
+  width: 69vw;
+  height: 34vw;
+  transform: translateY(3.1vw);
+}
+
+.bottomScreenHori {
+  border: 1px solid white;
+  font-size: 3vh;
+  width: 69vh;
+  height: 34vh;
+  transform: translateY(3.1vh);
+}
+
+/*# sourceMappingURL=Screens.css.map */

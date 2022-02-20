@@ -21,12 +21,22 @@ $pbScreen: rgb(36, 36, 36);
   width: $width;
 }
 
+.faPowerOffDevice {
+  z-index: 100;
+  fill: rgba(0, 0, 0, 0.30);
+}
+
+.faPowerOffDeviceVert {
+  transform: translate(43.6vw, -6vw);
+  background-size: 50vw 50vw;
+}
+
 .pdText {
   font-weight: 1000;
   color: $pbBodyText;
 }
 
-//============Vertical===========
+//==Vertical==
 
 .pdTextVert {
     font-size: 4vw;
@@ -103,8 +113,8 @@ $pbScreen: rgb(36, 36, 36);
     -0.025vw -0.025vw 0.5vw rgba(0, 0, 0, 0.40);
 }
 
-//============End-Vertical===========
-//============Horizontal=============
+//==End-Vertical==
+//===Horizontal===
 
 .pdTextHori {
   font-size: 4vh;
@@ -181,9 +191,9 @@ $pbScreen: rgb(36, 36, 36);
     -0.25vh -0.25vh 0.5vh rgba(0, 0, 0, 0.40);
 }
 
-//============End-Horizontal=============
+//==End-Horizontal===
 
-//============Styles-for-both============
+//==Styles-for-both==
 .pdContainer {
   position: absolute;
   display: flex;

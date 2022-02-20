@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import useIsMobile from '../hooks/getIsMobile'
+import { FaPowerOff } from 'react-icons/fa'
 
 import '../styles/Device/Device.css'
 
@@ -7,6 +8,7 @@ import '../styles/Device/Device.css'
 const Device = () => {
   return (
     <div className="pdContainer">
+      <FaPowerOff className={'faPowerOffDevice faPowerOffDevice' + (useIsMobile() ? "Vert" : "Hori")}/>
       <div className={'pd pdBodyLower pdBodyLower'        + (useIsMobile() ? "Vert" : "Hori")}></div>
       <div className={'pd pdBodyLowerDark pdBodyLowerDark'+ (useIsMobile() ? "Vert" : "Hori")}></div>
       <div className={'pd pdBezelLower pdBezelLower'      + (useIsMobile() ? "Vert" : "Hori")}></div>
