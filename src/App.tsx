@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './styles/App.css';
+import './styles/App/App.css';
 
 import Device from './components/Device';
 

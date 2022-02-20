@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
-require("./styles/App.css");
+require("./styles/App/App.css");
 const Device_1 = __importDefault(require("./components/Device"));
 function App() {
     return (<div className="App">

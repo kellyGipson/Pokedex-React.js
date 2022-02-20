@@ -5,6 +5,7 @@
 
 $pbBodyMain: #a13333;
 $pbBodyDark: #af3535;
+$pbBodyText: #812323;
 $pbBezel: rgb(46, 46, 46);
 $pbScreen: rgb(36, 36, 36);
 
@@ -20,7 +21,17 @@ $pbScreen: rgb(36, 36, 36);
   width: $width;
 }
 
+.pdText {
+  font-weight: 1000;
+  color: $pbBodyText;
+}
+
 //============Vertical===========
+
+.pdTextVert {
+    font-size: 4vw;
+    transform: rotate(-90deg) translateY(43.5vw) translateX(-25vw);
+}
 
 .pdScreenUpperVert{
   @include heightWidth(35vw, 70vw);
@@ -74,7 +85,8 @@ $pbScreen: rgb(36, 36, 36);
 .pdBodyLowerVert, .pdBodyUpperVert {
   box-shadow: 
     inset 0.5vw 0.5vw 1vw rgba(255, 255, 255, 0.30), 
-    inset -0.5vw -0.5vw 1vw rgba(0, 0, 0, 0.40);
+    inset -0.5vw -0.5vw 1vw rgba(0, 0, 0, 0.40),
+    2vw 2vw 2vw rgba(0, 0, 0, 0.20);
 }
 
 .pdBodyLowerDarkVert {
@@ -87,12 +99,17 @@ $pbScreen: rgb(36, 36, 36);
   box-shadow: 
     inset  0.05vw  0.05vw 0.5vw rgba(255, 255, 255, 0.30), 
     inset -0.05vw -0.05vw 0.5vw rgba(0, 0, 0, 0.30),
-     0.05vw  0.05vw 0.5vw rgba(255, 255, 255, 0.30), 
-    -0.05vw -0.05vw 0.5vw rgba(0, 0, 0, 0.30);
+     0.025vw  0.025vw 0.5vw rgba(255, 255, 255, 0.30), 
+    -0.025vw -0.025vw 0.5vw rgba(0, 0, 0, 0.40);
 }
 
 //============End-Vertical===========
 //============Horizontal=============
+
+.pdTextHori {
+  font-size: 4vh;
+  transform: rotate(-90deg) translateY(43.5vh) translateX(-25vh);
+}
 
 .pdScreenUpperHori{
   @include heightWidth(35vh, 70vh);
@@ -146,7 +163,8 @@ $pbScreen: rgb(36, 36, 36);
 .pdBodyLowerHori, .pdBodyUpperHori {
   box-shadow: 
     inset 0.5vh 0.5vh 1vh rgba(255, 255, 255, 0.30), 
-    inset -0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.40);
+    inset -0.5vh -0.5vh 1vh rgba(0, 0, 0, 0.40),
+    2vh 2vh 2vh rgba(0, 0, 0, 0.20);
 }
 
 .pdBodyLowerDarkHori {
@@ -159,8 +177,8 @@ $pbScreen: rgb(36, 36, 36);
   box-shadow: 
     inset  0.05vh  0.05vh 0.5vh rgba(255, 255, 255, 0.30), 
     inset -0.05vh -0.05vh 0.5vh rgba(0, 0, 0, 0.30),
-     0.05vh  0.05vh 0.5vh rgba(255, 255, 255, 0.30), 
-    -0.05vh -0.05vh 0.5vh rgba(0, 0, 0, 0.30);
+     0.25vh  0.25vh 0.5vh rgba(255, 255, 255, 0.30), 
+    -0.25vh -0.25vh 0.5vh rgba(0, 0, 0, 0.40);
 }
 
 //============End-Horizontal=============

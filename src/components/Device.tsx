@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import useIsMobile from '../hooks/getIsMobile'
 
-import '../styles/Device.css'
+import '../styles/Device/Device.css'
 
 
 const Device = () => {
@@ -14,6 +14,7 @@ const Device = () => {
       <div className={'pd pdBodyUpper pdBodyUpper'        + (useIsMobile() ? "Vert" : "Hori")}></div>
       <div className={'pd pdBezelUpper pdBezelUpper'      + (useIsMobile() ? "Vert" : "Hori")}></div>
       <div className={'pd pdScreenUpper pdScreenUpper'    + (useIsMobile() ? "Vert" : "Hori")}></div>
+      <div className={'pd pdText pdText' + (useIsMobile() ? "Vert" : "Hori")}>PokeDex</div>
     </div>
   )
 }
