@@ -7,8 +7,10 @@ require("../styles/Screens/Screens.css");
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
 const BottomScreen = () => {
     return (<>
-      <div className={"topScreen" + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}>
-        TopScreen
+      <div className={"topScreen topScreen" + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}>
+        <div className="topScreenContents">
+          
+        </div>
       </div>
     </>);
 };

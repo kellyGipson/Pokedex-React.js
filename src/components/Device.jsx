@@ -5,11 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
-const fa_1 = require("react-icons/fa");
 require("../styles/Device/Device.css");
 const Device = () => {
     return (<div className="pdContainer">
-      <fa_1.FaPowerOff className={'faPowerOffDevice faPowerOffDevice' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}/>
       <div className={'pd pdBodyLower pdBodyLower' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
       <div className={'pd pdBodyLowerDark pdBodyLowerDark' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
       <div className={'pd pdBezelLower pdBezelLower' + ((0, getIsMobile_1.default)() ? "Vert" : "Hori")}></div>
