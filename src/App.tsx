@@ -7,61 +7,98 @@ import Device from './components/Device';
 import BottomScreen from './components/BottomScreen';
 import TopScreen from './components/TopScreen'
 
-function App() {
-  const [fetchFailed, setFetchFailed] = React.useState<boolean>(true)
-  const [pokemonList, setPokemonList]: [Array<object>, any] = useState([])
-  let pokemonSpriteURL = {}
-  let pokemonShinySpriteURL = {}
-  let pokemonName = {}
-  let pokemonTypes = {}
-  let pokemonAbilities = {}
-  let pokemonHeight = {}
-  let pokemonWeight = {}
-  let pokemonStats = {}
+type pokemonList = {
+  name: string, 
+  url: string,
+}[]
 
-  // Fetch initial pokemon list
-  useEffect(() => {
-    for(let pageIndex = 1; pageIndex <= 898; pageIndex++) {
-      axios.get(`https://pokeapi.co/api/v2/pokemon/${pageIndex}/`)
-        .then((res) => {
-          setFetchFailed(false)
-          // assigning json values to local variables
-          pokemonShinySpriteURL = res.data.sprites.front_shiny
-          pokemonSpriteURL = res.data.sprites.front_default
-          pokemonName = res.data.name
-          pokemonTypes = res.data.types
-          pokemonAbilities = res.data.abilities
-          pokemonHeight = res.data.height
-          pokemonWeight = res.data.weight
-          // sets local variables to pokemonList state obj
-          setPokemonList(
-            ...pokemonList, 
-            {
-              pokemonName,
-              sprites: {
-                pokemonShinySpriteURL, 
-                pokemonSpriteURL,
-              },
-              pokemonTypes,
-              pokemonAbilities,
-              pokemonHeight,
-              pokemonWeight
-            })
-          })
-          .catch((error) => {
-            console.log(error)
-          })
+type pokemonInfo = {
+  pokemonSpriteURL: string,
+  pokemonShinySpriteURL: string,
+  pokemonName: string,
+  pokemonTypes: {
+    slot: number,
+    type: {
+      name: string,
+      url: string,
     }
-  }, [])
-  console.log(pokemonList)
+  }[],
+  pokemonAbilities: {
+    ability: {
+      name: string,
+      url: string,
+    },
+    is_hidden: boolean,
+    slot: number,
+  }[],
+  pokemonHeight: number,
+  pokemonWeight: number,
+  pokemonStats: {
+    base_stat: number,
+    effort: number,
+    stat: {
+      name: string,
+      url: string,
+    }
+  }[],
+}[]
 
+const App = () => {
+  const [pokemonList, setPokemonList]:[pokemonList, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
+  const [pokemonInfo, setPokemonInfo]: [Array<any>, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
+  const [offset, setOffset] = useState(12)
+  
+  useEffect(() => {
+    fetchPokemonList(offset)
+  }, [offset])
+  
+  // Fetch initial pokemon list
+  function fetchPokemonList(offset: number) {
+    let idx = 0
+    for (let i = offset; i < offset + 18; i++) {
+      axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
+      .then((res) => {
+        const url = res.data.results[idx].url
+        idx++
+        axios.get(url)
+        .then((res) => {
+            // assigning json values to local variables
+            let pokemonSpriteURL = res.data.sprites.front_default
+            let pokemonShinySpriteURL = res.data.sprites.front_shiny
+            let pokemonName = res.data.name
+            let pokemonTypes = res.data.types
+            let pokemonAbilities = res.data.abilities
+            let pokemonHeight = res.data.height
+            let pokemonWeight = res.data.weight
+            let pokemonStats = res.data.stats
+            const fetchedPokemonInfo = {
+              pokemonSpriteURL, 
+              pokemonShinySpriteURL, 
+              pokemonName, 
+              pokemonTypes, 
+              pokemonAbilities, 
+              pokemonHeight, 
+              pokemonWeight, 
+              pokemonStats
+            }
+            setPokemonInfo(prevInfo => [...prevInfo, fetchedPokemonInfo])
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
+  }
 
   return (
     <div className="App">
       <Device />
       <div className='screenContainer'>
         <TopScreen />
-        <BottomScreen {...pokemonList}/>
+        <BottomScreen offset={offset} setOffset={setOffset} pokemonInfo={pokemonInfo} pokemonList={pokemonList} fetchPokemonList={fetchPokemonList}/>
       </div>
     </div>
   );

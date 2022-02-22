@@ -11,8 +11,15 @@
   padding: 1em;
 }
 
+.pokemon {
+  width: 80%;
+  height: auto;
+}
+
 .bottomScreenContents {
-  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .topScreen, .bottomScreen {
