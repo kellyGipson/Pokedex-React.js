@@ -46,23 +46,33 @@ type pokemonInfo = {
 const App = () => {
   const [pokemonList, setPokemonList]:[pokemonList, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
   const [pokemonInfo, setPokemonInfo]: [Array<any>, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
-  const [offset, setOffset] = useState(12)
+  const [offset, setOffset] = useState(0)
   
   useEffect(() => {
     fetchPokemonList(offset)
   }, [offset])
+
+  function sleep(milliseconds: number) {
+    const date = Date.now()
+    let currentDate = null;
+    do {
+      currentDate = Date.now()
+    } while (currentDate - date < milliseconds)
+  }
   
   // Fetch initial pokemon list
   function fetchPokemonList(offset: number) {
-    let idx = 0
-    for (let i = offset; i < offset + 18; i++) {
-      axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
-      .then((res) => {
-        const url = res.data.results[idx].url
-        idx++
+    setPokemonInfo([])
+    // sleep(16) to fix a bug where the api would resolve too slowly and the 
+    // pokemon would appear out of order
+    axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
+    .then((res) => {
+      for (let i = 0; i < 18; i++) {
+        sleep(50)
+        const url = res.data.results[i].url
         axios.get(url)
         .then((res) => {
-            // assigning json values to local variables
+          // assigning json values to local variables
             let pokemonSpriteURL = res.data.sprites.front_default
             let pokemonShinySpriteURL = res.data.sprites.front_shiny
             let pokemonName = res.data.name
@@ -71,7 +81,9 @@ const App = () => {
             let pokemonHeight = res.data.height
             let pokemonWeight = res.data.weight
             let pokemonStats = res.data.stats
+            let key = i
             const fetchedPokemonInfo = {
+              key,
               pokemonSpriteURL, 
               pokemonShinySpriteURL, 
               pokemonName, 
@@ -86,12 +98,9 @@ const App = () => {
         .catch((err) => {
           console.log(err)
         })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    }
-  }
+      }}
+    )}
+    
 
   return (
     <div className="App">

@@ -12,15 +12,50 @@
 }
 
 .pokemon {
-  width: 80%;
   height: auto;
 }
 
-.bottomScreenContents {
-  // padding: 1em;
+.pokemonContainer {
   display: grid;
+  grid-area: pokemonContainer;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
+  padding-left: 0.5em;
+}
+
+.btnUp {
+  grid-area: btnup;
+  color: black;
+  font-size: 1.5em;
+}  
+
+.btnDown {
+  grid-area: btndown;
+  color: black;
+  font-size: 1.5em;
+}
+
+.btnContainer {
+  display: grid;
+  padding-right: 0.5em;
+  padding-top: 1em;
+  height: 80%;
+  grid-area: btnContainer;
+  grid-template-areas: 
+  "btnup"
+  "btndown";
+}
+
+.bottomScreenContents {
+  height: 93%;
+  width: 100%;
+  display: grid;
+  grid-template-areas: 
+  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
+  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
+  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
+  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer";
+  padding-top: 0.5em;
 }
 
 .topScreen, .bottomScreen {

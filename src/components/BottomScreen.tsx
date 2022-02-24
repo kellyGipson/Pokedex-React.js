@@ -8,6 +8,7 @@ import { render } from "@testing-library/react"
 type bottomScreenPropTypes = {
   pokemonList: {name: string, url: string,}[],
   pokemonInfo: {
+    key: number,
     pokemonSpriteURL: string,
     pokemonShinySpriteURL: string,
     pokemonName: string,
@@ -52,12 +53,16 @@ function BottomScreen({ offset, setOffset, pokemonInfo, fetchPokemonList }: bott
     <>
       <div className={"bottomScreen bottomScreen" + (useIsMobile() ? "Vert" : "Hori")}>
         <div className="bottomScreenContents">
-          {pokemonInfo.map((p, idx) => (
-            <img className="pokemon" src={p.pokemonSpriteURL} key={idx}/>
-          ))}
+          <div className="pokemonContainer">
+            {pokemonInfo.map((p, idx) => (
+              <img className="pokemon" src={p.pokemonSpriteURL} key={p.key}/>
+            ))}
+          </div>
+          <div className="btnContainer">
+            <button onClick={(e) => {(offset >= 0) && setOffset(offset - 6)}} className="btnUp">↑</button>
+            <button onClick={(e) => {(offset >= 0) && setOffset(offset + 6)}} className="btnDown">↓</button>
+          </div>
         </div>
-        <button onClick={(e) => {(offset >= 0) && setOffset(offset - 5)}} className="btnUp"></button>
-        <button onClick={(e) => {setOffset(offset + 6)}} className="btnDown"></button>
       </div>
     </>
   )

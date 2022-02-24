@@ -31,18 +31,27 @@ const TopScreen_1 = __importDefault(require("./components/TopScreen"));
 const App = () => {
     const [pokemonList, setPokemonList] = (0, react_1.useState)([]);
     const [pokemonInfo, setPokemonInfo] = (0, react_1.useState)([]);
-    const [offset, setOffset] = (0, react_1.useState)(12);
+    const [offset, setOffset] = (0, react_1.useState)(0);
     (0, react_1.useEffect)(() => {
         fetchPokemonList(offset);
     }, [offset]);
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
     // Fetch initial pokemon list
     function fetchPokemonList(offset) {
-        let idx = 0;
-        for (let i = offset; i < offset + 18; i++) {
-            axios_1.default.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
-                .then((res) => {
-                const url = res.data.results[idx].url;
-                idx++;
+        setPokemonInfo([]);
+        // sleep(16) to fix a bug where the api would resolve too slowly and the 
+        // pokemon would appear out of order
+        axios_1.default.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
+            .then((res) => {
+            for (let i = 0; i < 18; i++) {
+                sleep(50);
+                const url = res.data.results[i].url;
                 axios_1.default.get(url)
                     .then((res) => {
                     // assigning json values to local variables
@@ -54,7 +63,9 @@ const App = () => {
                     let pokemonHeight = res.data.height;
                     let pokemonWeight = res.data.weight;
                     let pokemonStats = res.data.stats;
+                    let key = i;
                     const fetchedPokemonInfo = {
+                        key,
                         pokemonSpriteURL,
                         pokemonShinySpriteURL,
                         pokemonName,
@@ -69,11 +80,8 @@ const App = () => {
                     .catch((err) => {
                     console.log(err);
                 });
-            })
-                .catch((error) => {
-                console.log(error);
-            });
-        }
+            }
+        });
     }
     return (<div className="App">
       <Device_1.default />
