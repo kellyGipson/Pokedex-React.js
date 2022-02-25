@@ -9,50 +9,50 @@ const fs = require('fs')
 //   } while (currentDate - date < milliseconds)
 // }
 
-type pokemonInfo = {
-  pokemonSpriteURL: string,
-  pokemonShinySpriteURL: string,
-  pokemonName: string,
-  pokemonTypeOne: string,
-  pokemonTypeTwo: string | null,
-  pokemonAbilities: {
-    pokemonAbilityOne: string,
-    pokemonAbilityOneIsHidden: boolean,
-    pokemonAbilityTwo: string | null,
-    pokemonAbilityTwoIsHidden: boolean,
-    pokemonAbilityThree: string | null,
-    pokemonAbilityThreeIsHidden: boolean,
-  },
-  pokemonHeight: number,
-  pokemonWeight: number,
-  pokemonStats: {
-      name: string,
-  }[],
-}[]
+// type pokemonInfo = {
+//   pokemonSpriteURL: string,
+//   pokemonShinySpriteURL: string,
+//   pokemonName: string,
+//   pokemonTypeOne: string,
+//   pokemonTypeTwo: string | null,
+//   pokemonAbilities: {
+//     pokemonAbilityOne: string,
+//     pokemonAbilityOneIsHidden: boolean,
+//     pokemonAbilityTwo: string | null,
+//     pokemonAbilityTwoIsHidden: boolean,
+//     pokemonAbilityThree: string | null,
+//     pokemonAbilityThreeIsHidden: boolean,
+//   },
+//   pokemonHeight: number,
+//   pokemonWeight: number,
+//   pokemonStats: {
+//       name: string,
+//   }[],
+// }[]
 
 // let pokemonList:pokemonInfo = []
 
 function fetchPokemonList() {
   let responses = []
-  for (let i = 1; i <= 2; i++) {
-    let response = axios.get(`pokeapi.co/api/v2/pokemon/${i}/`)
+  for (let i = 1; i <= 1; i++) {
+    let response = axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
     responses.push(response)
   }
   return Promise.all(responses)
 }
 
 const awaitJson = (responses) => Promise.all(responses.map(response => {
-  console.log(responses.status)
-  if(response.status === 200) return response
+  if(response.status === 200) return response.data
   throw new Error(response.status)
 }))
 
 fetchPokemonList()
   .then(awaitJson)
   .then(data => {
-    axios.get('pokeapi.co')
+    axios.get('https://pokeapi.co/')
       .then(response => {
-        if(response.status === 200) return response
+        console.log(data)
+        if(response.status === 200) return data
         throw new Error(response.status)
       })
   }).catch(function handleError(error) {
