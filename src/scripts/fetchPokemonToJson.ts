@@ -1,109 +1,93 @@
-const fs = require('fs')
 const axios = require('axios')
-const {stringify} = require('flatted')
+const fs = require('fs')
 
+// function sleep(milliseconds: number) {
+//   const date = Date.now()
+//   let currentDate = null;
+//   do {
+//     currentDate = Date.now()
+//   } while (currentDate - date < milliseconds)
+// }
 
 type pokemonInfo = {
   pokemonSpriteURL: string,
   pokemonShinySpriteURL: string,
   pokemonName: string,
-  pokemonTypes: {
-    slot: number,
-    type: {
-      name: string,
-      url: string,
-    }
-  }[],
+  pokemonTypeOne: string,
+  pokemonTypeTwo: string | null,
   pokemonAbilities: {
-    ability: {
-      name: string,
-      url: string,
-    },
-    is_hidden: boolean,
-    slot: number,
-  }[],
+    pokemonAbilityOne: string,
+    pokemonAbilityOneIsHidden: boolean,
+    pokemonAbilityTwo: string | null,
+    pokemonAbilityTwoIsHidden: boolean,
+    pokemonAbilityThree: string | null,
+    pokemonAbilityThreeIsHidden: boolean,
+  },
   pokemonHeight: number,
   pokemonWeight: number,
   pokemonStats: {
-    base_stat: number,
-    effort: number,
-    stat: {
       name: string,
-      url: string,
-    }
   }[],
 }[]
 
-let pokemonList:pokemonInfo = []
-function fetchPokemon() {
+// let pokemonList:pokemonInfo = []
 
-  for (let i = 1; i <= 898; i++) {
-    axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
-    .then((res) => {
-      // assigning json values to local variables
-      let pokemonSpriteURL = res.data.sprites.front_default
-      let pokemonShinySpriteURL = res.data.sprites.front_shiny
-      let pokemonName = res.data.name
-      let pokemonTypes = res.data.types
-      let pokemonAbilities = res.data.abilities
-      let pokemonHeight = res.data.height
-      let pokemonWeight = res.data.weight
-      let pokemonStats = res.data.stats
-      let key = i
-      const fetchedPokemonInfo = {
-        key,
-        pokemonSpriteURL, 
-        pokemonShinySpriteURL, 
-        pokemonName, 
-        pokemonTypes, 
-        pokemonAbilities, 
-        pokemonHeight, 
-        pokemonWeight, 
-        pokemonStats
-      }
-      pokemonList.push(fetchedPokemonInfo)
-      fs.writeFile('./src/assets/test.json', stringify(pokemonList), err => {
-        if (err) {
-          console.error(err)
-        }
+function fetchPokemonList() {
+  let responses = []
+  for (let i = 1; i <= 2; i++) {
+    let response = axios.get(`pokeapi.co/api/v2/pokemon/${i}/`)
+    responses.push(response)
+  }
+  return Promise.all(responses)
+}
+
+const awaitJson = (responses) => Promise.all(responses.map(response => {
+  console.log(responses.status)
+  if(response.status === 200) return response
+  throw new Error(response.status)
+}))
+
+fetchPokemonList()
+  .then(awaitJson)
+  .then(data => {
+    axios.get('pokeapi.co')
+      .then(response => {
+        if(response.status === 200) return response
+        throw new Error(response.status)
       })
-    })
-}}
+  }).catch(function handleError(error) {
+    console.log(error)
+  })
 
-fetchPokemon()
-
-// axios.get('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=898')
+// for (let i = 1; i <= 898; i++) {
+//   sleep(20)
+//   axios.get(`https://pokeapi.co/api/v2/pokemon/${i}/`)
 //   .then((res) => {
-//     const data = stringify(res)
-//     console.log(res)
-//     fs.writeFile('./src/assets/test.json', data, err => {
+//   sleep(20)
+//   // assigning json values to local variables
+//     let key = i
+//     let pokemonName = res.data.name
+//     let pokemonSpriteURL = res.data.sprites.front_default
+//     let pokemonShinySpriteURL = res.data.sprites.front_shiny
+//     let pokemonTypes = res.data.types
+//     let pokemonAbilities = res.data.abilities
+//     let pokemonHeight = res.data.height
+//     let pokemonWeight = res.data.weight
+//     let pokemonStats = res.data.stats
+//     const fetchedPokemonInfo = {
+//       key,
+//       pokemonName, 
+//       pokemonSpriteURL, 
+//       pokemonShinySpriteURL, 
+//       pokemonTypes, 
+//       pokemonAbilities, 
+//       pokemonHeight, 
+//       pokemonWeight, 
+//       pokemonStats
+//     }
+//     pokemonList.push(fetchedPokemonInfo)
+//     fs.writeFile('./src/assets/test.json', JSON.stringify(pokemonList), err => {
 //       if (err) {
 //         console.error(err)
 //       }
 //     })
-//   })
-
-  // axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=898`)
-  
-  //     const url = res.data.results[i].url
-  //     axios.get(url)
-  //         assigning json values to local variables
-  //         let pokemonSpriteURL = res.data.sprites.front_default
-  //         let pokemonShinySpriteURL = res.data.sprites.front_shiny
-  //         let pokemonName = res.data.name
-  //         let pokemonTypes = res.data.types
-  //         let pokemonAbilities = res.data.abilities
-  //         let pokemonHeight = res.data.height
-  //         let pokemonWeight = res.data.weight
-  //         let pokemonStats = res.data.stats
-  //         let key = i
-  //         const fetchedPokemonInfo = {
-  //           key,
-  //           pokemonSpriteURL, 
-  //           pokemonShinySpriteURL, 
-  //           pokemonName, 
-  //           pokemonTypes, 
-  //           pokemonAbilities, 
-  //           pokemonHeight, 
-  //           pokemonWeight, 
-  //           pokemonStats
