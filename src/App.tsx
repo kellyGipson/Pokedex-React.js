@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import './styles/App/App.css';
 import Device from './components/Device';
@@ -30,18 +30,58 @@ type pokemonListType = {
     "pokemonStatSpd": 45
 }[]
 
+// click the pokemon on the bottom screen
+// render the pokemon to the top screen
+
 const App = () => {
   const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
-  const [offset, setOffset] = useState(4)
+  const [selectedPokemon, setSelectedPokemon]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
+  const [offset, setOffset] = useState(0)
 
-  // console.log(pokemonJSON)
+  const handlePokemonClick = (e) => {
+    // click, 
+    // grab the id, 
+    // e.target.id
+    // grab id from pokemon list, 
+    // set that obj to selected pokemon
+    setSelectedPokemon(pokemonList.filter((pokemon, idx) => pokemonList[idx].key === Number(e.target.id)))
+  }
+  
+  const handleClickUp = (e) => {
+    if (offset === 4) {
+      setOffset(0)
+    } else if (offset > 0) {
+      setOffset(offset - 6)
+    }
+  }
+
+  const handleClickDown = (e) => {
+    //breaks at 876
+    if (offset === 876) {
+      setOffset(880)
+    }
+    if (offset >= 0 && offset < 876) {
+      setOffset(offset + 6)
+    }
+  }
 
   return (
     <div className="App">
       <Device />
       <div className='screenContainer'>
-        <TopScreen />
-        <BottomScreen offset={offset} setOffset={setOffset} pokemonList={pokemonList}/>
+        <TopScreen 
+          selectedPokemon={selectedPokemon}
+          handlePokemonClick={handlePokemonClick} 
+        />
+        <BottomScreen 
+          offset={offset} 
+          setOffset={setOffset} 
+          pokemonList={pokemonList} 
+          handlePokemonClick={handlePokemonClick} 
+          setSelectedPokemon={setSelectedPokemon}
+          handleClickUp={handleClickUp}
+          handleClickDown={handleClickDown}
+        />
       </div>
     </div>
   );

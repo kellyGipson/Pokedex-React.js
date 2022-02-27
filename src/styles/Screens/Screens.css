@@ -13,12 +13,17 @@
   align-items: center;
 }
 
+.topScreen {
+  height: 100%;
+}
+
 .topScreenContents {
-  padding: 1em;
+  padding: 0.5em;
+  height: 48.25%;
+  transform: translateY(-44.5%);
 }
 
 .pokemon {
-  height: auto;
   width: 100%;
 }
 
@@ -55,9 +60,9 @@
   display: grid;
   align-self: center;
   justify-content: center;
-  grid-template-areas: "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC .";
+  grid-template-areas: "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC";
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 6%;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
 .topScreenVert {

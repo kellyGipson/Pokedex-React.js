@@ -28,15 +28,42 @@ const Device_1 = __importDefault(require("./components/Device"));
 const BottomScreen_1 = __importDefault(require("./components/BottomScreen"));
 const TopScreen_1 = __importDefault(require("./components/TopScreen"));
 const pokemonJSON = require('./assets/pokemonList.json');
+// click the pokemon on the bottom screen
+// render the pokemon to the top screen
 const App = () => {
     const [pokemonList] = (0, react_1.useState)(pokemonJSON);
-    const [offset, setOffset] = (0, react_1.useState)(4);
-    // console.log(pokemonJSON)
+    const [selectedPokemon, setSelectedPokemon] = (0, react_1.useState)([]);
+    const [offset, setOffset] = (0, react_1.useState)(0);
+    const handlePokemonClick = (e) => {
+        // click, 
+        // grab the id, 
+        // e.target.id
+        // grab id from pokemon list, 
+        // set that obj to selected pokemon
+        setSelectedPokemon(pokemonList.filter((pokemon, idx) => pokemonList[idx].key === Number(e.target.id)));
+    };
+    const handleClickUp = (e) => {
+        if (offset === 4) {
+            setOffset(0);
+        }
+        else if (offset > 0) {
+            setOffset(offset - 6);
+        }
+    };
+    const handleClickDown = (e) => {
+        //breaks at 876
+        if (offset === 876) {
+            setOffset(880);
+        }
+        if (offset >= 0 && offset < 876) {
+            setOffset(offset + 6);
+        }
+    };
     return (<div className="App">
       <Device_1.default />
       <div className='screenContainer'>
-        <TopScreen_1.default />
-        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonList={pokemonList}/>
+        <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick}/>
+        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonList={pokemonList} handlePokemonClick={handlePokemonClick} setSelectedPokemon={setSelectedPokemon} handleClickUp={handleClickUp} handleClickDown={handleClickDown}/>
       </div>
     </div>);
 };
