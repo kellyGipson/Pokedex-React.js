@@ -5,7 +5,7 @@ import useIsMobile from "../hooks/getIsMobile"
 const BottomScreen = () => {
   return (
     <>
-      <div className={"topScreen topScreen" + (useIsMobile() ? "Vert" : "Hori")}>
+      <div className={`topScreen topScreen${useIsMobile()}`}>
         <div className="topScreenContents">
           
         </div>

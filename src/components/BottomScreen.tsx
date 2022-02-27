@@ -1,66 +1,72 @@
 import useIsMobile from "../hooks/getIsMobile"
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 
 import "../styles/Screens/Screens.css"
-import { render } from "@testing-library/react"
 
 type bottomScreenPropTypes = {
-  pokemonList: {name: string, url: string,}[],
-  pokemonInfo: {
-    key: number,
-    pokemonSpriteURL: string,
-    pokemonShinySpriteURL: string,
-    pokemonName: string,
-    pokemonTypes: {
-      slot: number,
-      type: {
-        name: string,
-        url: string,
-      }
-    }[],
-    pokemonAbilities: {
-      ability: {
-        name: string,
-        url: string,
-      },
-      is_hidden: boolean,
-      slot: number,
-    }[],
-    pokemonHeight: number,
-    pokemonWeight: number,
-    pokemonStats: {
-      base_stat: number,
-      effort: number,
-      stat: {
-        name: string,
-        url: string,
-      }
-    }[],
-  }[],
-  fetchPokemonList: (index: number) => void,
   offset: number,
   setOffset: React.Dispatch<React.SetStateAction<number>>,
+  pokemonList: {
+    "key": number,
+    "pokemonName": string,
+    "pokemonSpriteURL": string,
+    "pokemonShinySpriteURL": string,
+    "pokemonTypeOne": string,
+    "pokemonTypeTwo": string,
+    "pokemonAbilityOne": string,
+    "pokemonAbilityOneIsHidden": boolean,
+    "pokemonAbilityTwo": string | null,
+    "pokemonAbilityTwoIsHidden": boolean | null,
+    "pokemonAbilityThree": string | null,
+    "pokemonAbilityThreeIsHidden": boolean | null,
+    "pokemonHeight": 7,
+    "pokemonWeight": 69,
+    "pokemonStatHp": 45,
+    "pokemonStatAtt": 49,
+    "pokemonStatDef": 49,
+    "pokemonStatSpA": 65,
+    "pokemonStatSpD": 65,
+    "pokemonStatSpd": 45
+}[],
 }
 
-type pokemonInfo = {
-}
+export default function BottomScreen({ offset, setOffset, pokemonList }: bottomScreenPropTypes) {
+  
+  const handleClickUp = (e) => {
+    if (offset == 4) {
+      setOffset(0)
+    } else if (offset > 0) {
+      setOffset(offset - 6)
+    }
+  }
 
-function BottomScreen({ offset, setOffset, pokemonInfo, fetchPokemonList }: bottomScreenPropTypes) {
-
+  const handleClickDown = (e) => {
+    //breaks at 876
+    if (offset === 876) {
+      setOffset(880)
+    }
+    if (offset >= 0 && offset < 876) {
+      setOffset(offset + 6)
+    }
+  }
   
   return (
     <>
-      <div className={"bottomScreen bottomScreen" + (useIsMobile() ? "Vert" : "Hori")}>
+      <div className={`bottomScreen bottomScreen${useIsMobile()}`}>
+        <div>{offset}</div>
         <div className="bottomScreenContents">
-          <div className="pokemonContainer">
-            {pokemonInfo.map((p, idx) => (
-              <img className="pokemon" src={p.pokemonSpriteURL} key={p.key}/>
-            ))}
+          <div className={`pokemonContainer pokemonContainer${useIsMobile()}`}>
+            {
+              pokemonList.map((pokemon, idx) => (
+                (idx <= 17) ?
+                  <img className={'pokemon'} src={pokemonList[idx + offset].pokemonSpriteURL} alt={pokemonList[idx + offset].pokemonName} key={pokemonList[idx + offset].key}/>
+                  : null
+              ))
+            }
           </div>
-          <div className="btnContainer">
-            <button onClick={(e) => {(offset >= 0) && setOffset(offset - 6)}} className="btnUp">↑</button>
-            <button onClick={(e) => {(offset >= 0) && setOffset(offset + 6)}} className="btnDown">↓</button>
+          <div className={`btnContainer btnContainer${useIsMobile()}`}>
+            <button onClick={handleClickUp} className={`btnUp btnUp${useIsMobile()}`}>↑</button>
+            <button onClick={handleClickDown} className={`btnDown btnDown${useIsMobile()}`}>↓</button>
           </div>
         </div>
       </div>
@@ -68,4 +74,8 @@ function BottomScreen({ offset, setOffset, pokemonInfo, fetchPokemonList }: bott
   )
 }
 
-export default BottomScreen
+/* {pokemonList.map((p, idx) => (
+              (idx <= 23) ? 
+                <img className={'pokemon'} src={p.pokemonSpriteURL} alt={p.pokemonName} key={p.key}/> 
+                : null
+            ))} */

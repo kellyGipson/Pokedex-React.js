@@ -7,20 +7,32 @@
   align-items: center;
 }
 
+//==Both==//
+
+.topScreen, .bottomScreen {
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+}
+
+//==Top-Screen==//
+
 .topScreenContents {
   padding: 1em;
 }
 
+//==Bottom-Screen==//
+
 .pokemon {
   height: auto;
+  width: 100%;
 }
 
 .pokemonContainer {
   display: grid;
-  grid-area: pokemonContainer;
+  grid-area: pC;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  padding-left: 0.5em;
 }
 
 .btnUp {
@@ -37,10 +49,9 @@
 
 .btnContainer {
   display: grid;
-  padding-right: 0.5em;
-  padding-top: 1em;
-  height: 80%;
-  grid-area: btnContainer;
+  align-self: center;
+  justify-self: center;
+  grid-area: bC;
   grid-template-areas: 
   "btnup"
   "btndown";
@@ -50,17 +61,17 @@
   height: 93%;
   width: 100%;
   display: grid;
+  align-self: center;
+  justify-content: center;
   grid-template-areas: 
-  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
-  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
-  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer"
-  "pokemonContainer pokemonContainer pokemonContainer pokemonContainer btnContainer";
-  padding-top: 0.5em;
+  "pC pC pC pC pC pC bC"
+  "pC pC pC pC pC pC bC"
+  "pC pC pC pC pC pC bC"
+  "pC pC pC pC pC pC .";
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 6%;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
-.topScreen, .bottomScreen {
-  overflow: hidden;
-}
 
 //==Top-Vertical==
 
@@ -89,6 +100,11 @@
   transform: translateY(3.1vw);
 }
 
+.btnContainerVert {
+  width: 5vw;
+  height: 25vw;
+}
+
 //==Bottom-Horizontal==
 
 .bottomScreenHori {
@@ -96,4 +112,9 @@
   width: 69vh;
   height: 34vh;
   transform: translateY(3.1vh);
+}
+
+.btnContainerHori {
+  width: 5vh;
+  height: 25vh;
 }

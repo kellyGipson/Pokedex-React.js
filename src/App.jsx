@@ -23,71 +23,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const axios_1 = __importDefault(require("axios"));
 require("./styles/App/App.css");
 const Device_1 = __importDefault(require("./components/Device"));
 const BottomScreen_1 = __importDefault(require("./components/BottomScreen"));
 const TopScreen_1 = __importDefault(require("./components/TopScreen"));
+const pokemonJSON = require('./assets/pokemonList.json');
 const App = () => {
-    const [pokemonList, setPokemonList] = (0, react_1.useState)([]);
-    const [pokemonInfo, setPokemonInfo] = (0, react_1.useState)([]);
-    const [offset, setOffset] = (0, react_1.useState)(0);
-    (0, react_1.useEffect)(() => {
-        fetchPokemonList(offset);
-    }, [offset]);
-    function sleep(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-            currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-    }
-    // Fetch initial pokemon list
-    function fetchPokemonList(offset) {
-        setPokemonInfo([]);
-        // sleep(16) to fix a bug where the api would resolve too slowly and the 
-        // pokemon would appear out of order
-        axios_1.default.get(`https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=18`)
-            .then((res) => {
-            for (let i = 0; i < 18; i++) {
-                sleep(50);
-                const url = res.data.results[i].url;
-                axios_1.default.get(url)
-                    .then((res) => {
-                    // assigning json values to local variables
-                    let pokemonSpriteURL = res.data.sprites.front_default;
-                    let pokemonShinySpriteURL = res.data.sprites.front_shiny;
-                    let pokemonName = res.data.name;
-                    let pokemonTypes = res.data.types;
-                    let pokemonAbilities = res.data.abilities;
-                    let pokemonHeight = res.data.height;
-                    let pokemonWeight = res.data.weight;
-                    let pokemonStats = res.data.stats;
-                    let key = i;
-                    const fetchedPokemonInfo = {
-                        key,
-                        pokemonSpriteURL,
-                        pokemonShinySpriteURL,
-                        pokemonName,
-                        pokemonTypes,
-                        pokemonAbilities,
-                        pokemonHeight,
-                        pokemonWeight,
-                        pokemonStats
-                    };
-                    setPokemonInfo(prevInfo => [...prevInfo, fetchedPokemonInfo]);
-                })
-                    .catch((err) => {
-                    console.log(err);
-                });
-            }
-        });
-    }
+    const [pokemonList] = (0, react_1.useState)(pokemonJSON);
+    const [offset, setOffset] = (0, react_1.useState)(4);
+    // console.log(pokemonJSON)
     return (<div className="App">
       <Device_1.default />
       <div className='screenContainer'>
         <TopScreen_1.default />
-        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonInfo={pokemonInfo} pokemonList={pokemonList} fetchPokemonList={fetchPokemonList}/>
+        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonList={pokemonList}/>
       </div>
     </div>);
 };

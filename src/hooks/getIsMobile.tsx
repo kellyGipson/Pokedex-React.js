@@ -17,5 +17,7 @@ export default function useIsMobile() {
     }
   }, [])
 
-  return isMobile
+  if (isMobile) {
+    return "Vert"
+  } else return "Hori"
 }

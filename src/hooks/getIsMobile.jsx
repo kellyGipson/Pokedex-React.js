@@ -13,6 +13,10 @@ function useIsMobile() {
             window.removeEventListener("resize", onResize);
         };
     }, []);
-    return isMobile;
+    if (isMobile) {
+        return "Vert";
+    }
+    else
+        return "Hori";
 }
 exports.default = useIsMobile;
