@@ -1,0 +1,86 @@
+
+
+@mixin roundCorners($radius: 20px) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+.pokemonDetailsContainer {
+  font-size: 0.65em;
+  height: 100%;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr fit-content 1fr 1fr;
+  grid-template-rows: 60% 40%;
+  grid-template-areas: 
+  "img name abilities size"
+  "types stats stats stats";
+}
+
+.abilityContainer, .sizeContainer, .typeContainer, .statContainer {
+  display: grid;
+  gap: 5%;
+}
+
+.pAbilityOne, .pAbilityTwo, .pAbilityThree {
+  @include roundCorners(1em);
+  border: 1px solid #ddd;
+  width: max-content;
+  height: min-content;
+  padding: 4%;
+}
+
+.pName {
+  // @include roundCorners(1em);
+  // border: 1px solid #ddd;
+  text-decoration: underline;
+  text-align: center;
+  width: fit-content;
+  height: min-content;
+  padding: 4%;
+  padding-inline: 10%;
+}
+
+.pTypeOne, .pTypeTwo {
+  @include roundCorners(1em);
+  text-align: center;
+  border: 1px solid #ddd;
+  width: 50%;
+  height: min-content;
+  padding: 4%;
+}
+
+.pImg {
+  height: auto;
+  width: 100%;
+  grid-area: img;
+  font-size: 0.5em;
+}
+
+.pName {
+  grid-area: name;
+}
+
+.abilityContainer {
+  grid-area: abilities;
+}
+
+.sizeContainer {
+  grid-area: size;
+}
+
+.typeContainer {
+  grid-area: types;
+  display: grid;
+  gap: 5%;
+}
+
+.statContainer {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-area: stats;
+}
