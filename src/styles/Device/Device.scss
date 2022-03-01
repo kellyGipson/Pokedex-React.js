@@ -6,8 +6,8 @@
 $pbBodyMain: #a13333;
 $pbBodyDark: #af3535;
 $pbBodyText: #812323;
-$pbBezel: rgb(46, 46, 46);
 $pbScreen: rgb(36, 36, 36);
+$pbBezel: rgb(46, 46, 46);
 
 @mixin roundCorners($radius: 20px) {
   border-top-left-radius: $radius;

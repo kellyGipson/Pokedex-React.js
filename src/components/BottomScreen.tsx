@@ -9,6 +9,7 @@ type bottomScreenPropTypes = {
   handlePokemonClick: React.MouseEventHandler<HTMLImageElement>,
   handleClickUp: (e: any) => void,
   handleClickDown: (e: any) => void,
+  setShowShiny: React.Dispatch<React.SetStateAction<boolean>>
   pokemonList: {
     "key": number,
     "pokemonName": string,
@@ -41,6 +42,7 @@ export default function BottomScreen({
   handlePokemonClick,
   handleClickUp,
   handleClickDown,
+  setShowShiny
 }: bottomScreenPropTypes) {
   
   return (

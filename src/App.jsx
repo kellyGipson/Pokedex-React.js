@@ -34,6 +34,10 @@ const App = () => {
     const [pokemonList] = (0, react_1.useState)(pokemonJSON);
     const [selectedPokemon, setSelectedPokemon] = (0, react_1.useState)([]);
     const [offset, setOffset] = (0, react_1.useState)(0);
+    const [showShiny, setShowShiny] = (0, react_1.useState)(false);
+    const toggleShinySprite = (e) => {
+        setShowShiny(!showShiny);
+    };
     const handlePokemonClick = (e) => {
         // click, 
         // grab the id, 
@@ -41,6 +45,7 @@ const App = () => {
         // grab id from pokemon list, 
         // set that obj to selected pokemon
         setSelectedPokemon(pokemonList.filter((pokemon, idx) => pokemonList[idx].key === Number(e.target.id)));
+        setShowShiny(false);
     };
     const handleClickUp = (e) => {
         if (offset === 4) {
@@ -62,8 +67,8 @@ const App = () => {
     return (<div className="App">
       <Device_1.default />
       <div className='screenContainer'>
-        <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick}/>
-        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonList={pokemonList} handlePokemonClick={handlePokemonClick} setSelectedPokemon={setSelectedPokemon} handleClickUp={handleClickUp} handleClickDown={handleClickDown}/>
+        <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick} showShiny={showShiny} setShowShiny={setShowShiny} toggleShinySprite={toggleShinySprite}/>
+        <BottomScreen_1.default offset={offset} setOffset={setOffset} pokemonList={pokemonList} handlePokemonClick={handlePokemonClick} setSelectedPokemon={setSelectedPokemon} handleClickUp={handleClickUp} handleClickDown={handleClickDown} setShowShiny={setShowShiny}/>
       </div>
     </div>);
 };

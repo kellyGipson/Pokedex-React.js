@@ -1,3 +1,10 @@
+@mixin roundCorners($radius: 20px) {
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
 .screenContainer {
   height: 100vh;
   width: 100vw;
@@ -17,14 +24,10 @@
 
 //==Top-Screen==//
 
-.topScreen {
-  height: 100%;
-}
-
 .topScreenContents {
   padding: 0.5em;
-  height: 48.25%;
-  transform: translateY(-44.5%);
+  height: 91.18%;
+  transform: translateY(-0%);
 }
 
 //==Bottom-Screen==//
@@ -40,22 +43,40 @@
   grid-template-rows: 1fr 1fr 1fr;
 }
 
+.btnUp:hover, .btnDown:hover {
+  background-color: #444;
+}
+
+.btnUp:hover {
+  transform: translateY(1%);
+}
+
+.btnDown:hover {
+  transform: translateY(-1%);
+}
+
+.btnUp, .btnDown {
+  font-size: 1.5em;
+  border: 0;
+  padding: 0;
+  color: #AAA;
+  background-color: #333;
+  @include roundCorners(0.125em);
+}
+
 .btnUp {
   grid-area: btnup;
-  color: black;
-  font-size: 1.5em;
-}  
+}
 
 .btnDown {
   grid-area: btndown;
-  color: black;
-  font-size: 1.5em;
 }
 
 .btnContainer {
   display: grid;
   align-self: center;
   justify-self: center;
+  gap: 2%;
   grid-area: bC;
   grid-template-areas: 
   "btnup"
@@ -83,7 +104,7 @@
   font-size: 3vw;
   width: 69vw;
   height: 34vw;
-  transform: translateY(-5.6vw);
+  transform: translateY(-5.8vw);
 }
 
 //==Top-Horizontal==
@@ -105,7 +126,7 @@
 }
 
 .btnContainerVert {
-  width: 5vw;
+  width: 4vw;
   height: 25vw;
 }
 
@@ -119,6 +140,6 @@
 }
 
 .btnContainerHori {
-  width: 5vh;
+  width: 4vh;
   height: 25vh;
 }

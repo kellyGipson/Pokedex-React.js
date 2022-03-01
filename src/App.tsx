@@ -37,6 +37,11 @@ const App = () => {
   const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
   const [selectedPokemon, setSelectedPokemon]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
   const [offset, setOffset] = useState(0)
+  const [showShiny, setShowShiny] = useState(false)
+
+  const toggleShinySprite = (e) => {
+    setShowShiny(!showShiny)
+  }
 
   const handlePokemonClick = (e) => {
     // click, 
@@ -45,6 +50,7 @@ const App = () => {
     // grab id from pokemon list, 
     // set that obj to selected pokemon
     setSelectedPokemon(pokemonList.filter((pokemon, idx) => pokemonList[idx].key === Number(e.target.id)))
+    setShowShiny(false)
   }
   
   const handleClickUp = (e) => {
@@ -72,6 +78,9 @@ const App = () => {
         <TopScreen 
           selectedPokemon={selectedPokemon}
           handlePokemonClick={handlePokemonClick} 
+          showShiny={showShiny}
+          setShowShiny={setShowShiny}
+          toggleShinySprite={toggleShinySprite}
         />
         <BottomScreen 
           offset={offset} 
@@ -81,6 +90,7 @@ const App = () => {
           setSelectedPokemon={setSelectedPokemon}
           handleClickUp={handleClickUp}
           handleClickDown={handleClickDown}
+          setShowShiny={setShowShiny}
         />
       </div>
     </div>

@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
 require("../styles/Screens/Screens.css");
-function BottomScreen({ offset, setOffset, pokemonList, setSelectedPokemon, handlePokemonClick, handleClickUp, handleClickDown, }) {
+function BottomScreen({ offset, setOffset, pokemonList, setSelectedPokemon, handlePokemonClick, handleClickUp, handleClickDown, setShowShiny }) {
     return (<div className={`bottomScreen bottomScreen${(0, getIsMobile_1.default)()}`}>
       <div className="bottomScreenContents">
         <div className={`pokemonContainer pokemonContainer${(0, getIsMobile_1.default)()}`}>

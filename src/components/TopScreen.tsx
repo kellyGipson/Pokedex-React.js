@@ -5,6 +5,9 @@ import useIsMobile from "../hooks/getIsMobile"
 
 type topScreenProps = {
   handlePokemonClick: React.Dispatch<React.SetStateAction<number>>,
+  showShiny: boolean,
+  setShowShiny: React.Dispatch<React.SetStateAction<boolean>>,
+  toggleShinySprite: (e: any) => void,
   selectedPokemon: {
     "key": number,
     "pokemonName": string,
@@ -29,7 +32,12 @@ type topScreenProps = {
 }[],
 }
 
-const TopScreen = ({ handlePokemonClick, selectedPokemon }: topScreenProps) => {
+const TopScreen = ({ handlePokemonClick, selectedPokemon, showShiny, setShowShiny, toggleShinySprite }: topScreenProps) => {
+  
+  const capitalize = (string: string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
+  
   return (
     <>
       <div className={`topScreen topScreen${useIsMobile()}`}>
@@ -37,25 +45,26 @@ const TopScreen = ({ handlePokemonClick, selectedPokemon }: topScreenProps) => {
           {
             selectedPokemon.map((idx) => (
               <div key={selectedPokemon[0].key} className="pokemonDetailsContainer">
-                <img className="pImg notShiny" src={selectedPokemon[0].pokemonSpriteURL} alt="" />
-                <img className="pImg shiny" src={selectedPokemon[0].pokemonShinySpriteURL} alt="" />
-                <div className="pokemonDetails">
-                  <div className="abilityContainer">
-                    <div className="pName">{selectedPokemon[0].pokemonName}</div>
-                    <div>Abilities</div>
-                    <div className="pAbilityOne">{selectedPokemon[0].pokemonAbilityOne}</div>
-                    {(selectedPokemon[0].pokemonAbilityTwo)   ? <div className={(selectedPokemon[0].pokemonAbilityTwoIsHidden) ? "Hidden pAbilityTwo" : 'pAbilityTwo'}>{selectedPokemon[0].pokemonAbilityTwo}</div> : null}
-                    {(selectedPokemon[0].pokemonAbilityThree) ? <div className={(selectedPokemon[0].pokemonAbilityThreeIsHidden) ? "Hidden pAbilityThree" : "pAbilityThree"}>{selectedPokemon[0].pokemonAbilityThree}</div> : null}
-                  </div>
-                  <div className="sizeContainer">
-                    <div className="pHeight">Height: {selectedPokemon[0].pokemonHeight/10} m</div>
-                    <div className="pWeight">Weight: {selectedPokemon[0].pokemonWeight/10} kg</div>
-                  </div>
+                <div className="pImg">
+                  <img onClick={toggleShinySprite} className="pImg" style={{ display: (showShiny) ? "none" : "block" }} src={selectedPokemon[0].pokemonSpriteURL} alt="" />
+                  <img onClick={toggleShinySprite} className="pImg" style={{ display: (showShiny) ? "block" : "none" }} src={selectedPokemon[0].pokemonShinySpriteURL} alt="" />
+                  <p>Click for Shiny Sprite</p>
+                </div>
+                <div className="pName">{capitalize(selectedPokemon[0].pokemonName)}</div>
+                <div className="abilityContainer">
+                  <div>Abilities:</div>
+                  <div className="pAbilityOne">{capitalize(selectedPokemon[0].pokemonAbilityOne)}</div>
+                  {(selectedPokemon[0].pokemonAbilityTwo)   ? <div className={(selectedPokemon[0].pokemonAbilityTwoIsHidden) ? "Hidden pAbilityTwo" : 'pAbilityTwo'}>{capitalize(selectedPokemon[0].pokemonAbilityTwo)}</div> : null}
+                  {(selectedPokemon[0].pokemonAbilityThree) ? <div className={(selectedPokemon[0].pokemonAbilityThreeIsHidden) ? "Hidden pAbilityThree" : "pAbilityThree"}>{capitalize(selectedPokemon[0].pokemonAbilityThree)}</div> : null}
+                </div>
+                <div className="sizeContainer">
+                  <div className="pHeight">Height: {selectedPokemon[0].pokemonHeight/10}m</div>
+                  <div className="pWeight">Weight: {selectedPokemon[0].pokemonWeight/10}kg</div>
                 </div>
                 <div className="typeContainer">
-                  <div>Types</div>
-                  <div className="pTypeOne">{selectedPokemon[0].pokemonTypeOne}</div>
-                  {(selectedPokemon[0].pokemonTypeTwo) ? <div className="pTypeTwo">{selectedPokemon[0].pokemonTypeTwo}</div> : null}
+                  <div>Types:</div>
+                  <div className="pTypeOne">{capitalize(selectedPokemon[0].pokemonTypeOne)}</div>
+                  {(selectedPokemon[0].pokemonTypeTwo) ? <div className="pTypeTwo">{capitalize(selectedPokemon[0].pokemonTypeTwo)}</div> : null}
                 </div>
                 <div className="statContainer">
                   <div className="pStat">
@@ -73,8 +82,8 @@ const TopScreen = ({ handlePokemonClick, selectedPokemon }: topScreenProps) => {
                   <div className="pStat">
                     <div className="pSpA">Sp. Attack</div>
                     <div className="pSpAValue">{selectedPokemon[0].pokemonStatSpA}</div>
-                  <div className="pStat">
                   </div>
+                  <div className="pStat">
                     <div className="pSpD">Sp. Def</div>
                     <div className="pSpDValue">{selectedPokemon[0].pokemonStatSpD}</div>
                   </div>
