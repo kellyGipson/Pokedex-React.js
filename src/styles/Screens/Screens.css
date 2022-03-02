@@ -19,8 +19,26 @@
   transform: translateY(0%);
 }
 
+.searchContainer {
+  grid-area: sp;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBox {
+  width: 90%;
+  height: 50%;
+  background-color: #333;
+  border-style: none;
+}
+
+.searchBox:hover {
+  border: 1px solid #444;
+}
+
 .pokemon {
-  width: 100%;
+  width: 90%;
 }
 
 .pokemonContainer {
@@ -77,9 +95,9 @@
   display: grid;
   align-self: center;
   justify-content: center;
-  grid-template-areas: "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC";
+  grid-template-areas: "sp sp sp sp sp sp sp" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC" "pC pC pC pC pC pC bC";
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 6%;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 10% 1fr 1fr 1fr;
 }
 
 .topScreenVert {

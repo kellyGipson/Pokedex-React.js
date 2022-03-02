@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './styles/App/App.css';
 import Device from './components/Device';
 import BottomScreen from './components/BottomScreen';
 import TopScreen from './components/TopScreen'
-
-const pokemonJSON = require('./assets/pokemonList.json')
 
 type pokemonListType = {
     "key": number,
@@ -30,16 +28,76 @@ type pokemonListType = {
     "pokemonStatSpd": 45
 }[]
 
+const pokemonJSON: Array<any> = require('./assets/pokemonList.json')
+
 // click the pokemon on the bottom screen
 // render the pokemon to the top screen
 
 const App = () => {
   const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
+  const [filteredPokemonList, setFilteredPokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonList)
   const [selectedPokemon, setSelectedPokemon]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
   const [offset, setOffset] = useState(0)
   const [showShiny, setShowShiny] = useState(false)
+  const [filter, setFilter] = useState('')
 
-  const toggleShinySprite = (e) => {
+  const handleFilterPokemon = (filterText: string) => {
+    setFilteredPokemonList(pokemonList)
+    //type in the field
+    //return the pokemon that match the text field
+    const filterPokemon = pokemonList.filter(pokemon => pokemon.pokemonName.startsWith(filterText.toLowerCase()))
+    console.log(filterText)
+    if (filterPokemon.length % 6 !== 0) {
+      //calc by how much its off
+      const leftOver = filterPokemon.length % 6
+      console.log(filterPokemon.length)
+      const objectsToInsert = 6 - leftOver
+      console.log(objectsToInsert)
+      //insert blank objects
+      const blankObjectsEmpty = []
+      for (let i = 0; i < objectsToInsert; i++) {
+        blankObjectsEmpty.push({
+          key: i + filterPokemon.length + 1,
+          pokemonAbilityOne: null,
+          pokemonAbilityOneIsHidden: null,
+          pokemonAbilityThree: null,
+          pokemonAbilityThreeIsHidden: null,
+          pokemonAbilityTwo: null,
+          pokemonAbilityTwoIsHidden: null,
+          pokemonHeight: null,
+          pokemonName: null,
+          pokemonShinySpriteURL: null,
+          pokemonSpriteURL: null,
+          pokemonStatAtt: null,
+          pokemonStatDef: null,
+          pokemonStatHp: null,
+          pokemonStatSpA: null,
+          pokemonStatSpD: null,
+          pokemonStatSpd: null,
+          pokemonTypeOne: null,
+          pokemonTypeTwo: null,
+          pokemonWeight: null,
+        })
+      }
+      console.log(blankObjectsEmpty)
+      const newFilteredPokemon = [...filterPokemon, ...blankObjectsEmpty]//existing list plus the blank objects
+      setFilteredPokemonList(newFilteredPokemon)
+      console.log(newFilteredPokemon)
+      return
+    } else {
+      setFilteredPokemonList(filterPokemon)
+    }
+  }
+
+  useEffect(() => {
+    console.log("Calling handleFilterPokemon")
+    handleFilterPokemon("")
+  },[])
+
+  // const addBlanksToList = (filterPokemon) => {
+  // }
+
+  const toggleShinySprite = (e: React.MouseEventHandler<HTMLButtonElement>) => {
     setShowShiny(!showShiny)
   }
 
@@ -49,24 +107,18 @@ const App = () => {
     // e.target.id
     // grab id from pokemon list, 
     // set that obj to selected pokemon
-    setSelectedPokemon(pokemonList.filter((pokemon, idx) => pokemonList[idx].key === Number(e.target.id)))
+    setSelectedPokemon(filteredPokemonList.filter((pokemon, idx) => filteredPokemonList[idx].key === Number(e.target.id)))
     setShowShiny(false)
   }
-  
+  /* if the length isn't divisible by 18 and the current offset is >= the next page, set the offset to length - 1 */
   const handleClickUp = (e) => {
-    if (offset === 4) {
-      setOffset(0)
-    } else if (offset > 0) {
+    if (offset > 0) {
       setOffset(offset - 6)
     }
   }
 
   const handleClickDown = (e) => {
-    //breaks at 876
-    if (offset === 876) {
-      setOffset(880)
-    }
-    if (offset >= 0 && offset < 876) {
+    if (offset >= 0 && offset < filteredPokemonList.length-19) {
       setOffset(offset + 6)
     }
   }
@@ -83,14 +135,14 @@ const App = () => {
           toggleShinySprite={toggleShinySprite}
         />
         <BottomScreen 
-          offset={offset} 
-          setOffset={setOffset} 
-          pokemonList={pokemonList} 
-          handlePokemonClick={handlePokemonClick} 
-          setSelectedPokemon={setSelectedPokemon}
+          offset={offset}
+          filteredPokemonList={filteredPokemonList}
+          handlePokemonClick={handlePokemonClick}
           handleClickUp={handleClickUp}
           handleClickDown={handleClickDown}
-          setShowShiny={setShowShiny}
+          handleFilterPokemon={handleFilterPokemon}
+          filter={filter}
+          setFilter={setFilter}
         />
       </div>
     </div>

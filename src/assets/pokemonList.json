@@ -19603,7 +19603,7 @@
   },
   {
     "key": 892,
-    "pokemonName": "urshifu-single-strike",
+    "pokemonName": "urshifu",
     "pokemonSpriteURL": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/892.png",
     "pokemonShinySpriteURL": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/892.png",
     "pokemonTypeOne": "fighting",

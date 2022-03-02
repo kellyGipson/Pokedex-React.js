@@ -4,13 +4,13 @@ import "../styles/Screens/Screens.css"
 
 type bottomScreenPropTypes = {
   offset: number,
-  setOffset: React.Dispatch<React.SetStateAction<number>>,
-  setSelectedPokemon: React.Dispatch<React.SetStateAction<any[]>>,
   handlePokemonClick: React.MouseEventHandler<HTMLImageElement>,
-  handleClickUp: (e: any) => void,
-  handleClickDown: (e: any) => void,
-  setShowShiny: React.Dispatch<React.SetStateAction<boolean>>
-  pokemonList: {
+  handleClickUp: React.MouseEventHandler<HTMLButtonElement>,
+  handleClickDown: React.MouseEventHandler<HTMLButtonElement>,
+  handleFilterPokemon: (value: string) => void,
+  filter: string,
+  setFilter: React.Dispatch<React.SetStateAction<string>>,
+  filteredPokemonList: {
     "key": number,
     "pokemonName": string,
     "pokemonSpriteURL": string,
@@ -35,28 +35,31 @@ type bottomScreenPropTypes = {
 }
 
 export default function BottomScreen({ 
-  offset, 
-  setOffset, 
-  pokemonList, 
-  setSelectedPokemon,
+  offset,
   handlePokemonClick,
   handleClickUp,
   handleClickDown,
-  setShowShiny
+  filteredPokemonList,
+  handleFilterPokemon,
+  filter,
+  setFilter, 
 }: bottomScreenPropTypes) {
   
   return (
     <div className={`bottomScreen bottomScreen${useIsMobile()}`}>
       <div className="bottomScreenContents">
+        <div className="searchContainer">
+          <input className="searchBox" type="text" onChange={(e) => {handleFilterPokemon(e.target.value)}}/>
+        </div>
         <div className={`pokemonContainer pokemonContainer${useIsMobile()}`}>
-          {pokemonList.map((pokemon, idx) => (
+          {filteredPokemonList.map((pokemon, idx) => (
               (idx <= 17) ?
                 <img 
                   className={'pokemon'} 
-                  src={pokemonList[idx + offset].pokemonSpriteURL} 
-                  alt={pokemonList[idx + offset].pokemonName} 
-                  key={pokemonList[idx + offset].key}
-                  id={pokemonList[idx + offset].key.toString()}
+                  src={filteredPokemonList[idx + offset].pokemonSpriteURL} 
+                  alt={filteredPokemonList[idx + offset].pokemonName} 
+                  key={filteredPokemonList[idx + offset].key}
+                  id={filteredPokemonList[idx + offset].key.toString()}
                   onClick={handlePokemonClick}
                 />
               : null

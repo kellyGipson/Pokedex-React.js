@@ -5,12 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
 require("../styles/Screens/Screens.css");
-function BottomScreen({ offset, setOffset, pokemonList, setSelectedPokemon, handlePokemonClick, handleClickUp, handleClickDown, setShowShiny }) {
+function BottomScreen({ offset, handlePokemonClick, handleClickUp, handleClickDown, filteredPokemonList, handleFilterPokemon, filter, setFilter, }) {
     return (<div className={`bottomScreen bottomScreen${(0, getIsMobile_1.default)()}`}>
       <div className="bottomScreenContents">
+        <div className="searchContainer">
+          <input className="searchBox" type="text" onChange={(e) => { handleFilterPokemon(e.target.value); }}/>
+        </div>
         <div className={`pokemonContainer pokemonContainer${(0, getIsMobile_1.default)()}`}>
-          {pokemonList.map((pokemon, idx) => ((idx <= 17) ?
-            <img className={'pokemon'} src={pokemonList[idx + offset].pokemonSpriteURL} alt={pokemonList[idx + offset].pokemonName} key={pokemonList[idx + offset].key} id={pokemonList[idx + offset].key.toString()} onClick={handlePokemonClick}/>
+          {filteredPokemonList.map((pokemon, idx) => ((idx <= 17) ?
+            <img className={'pokemon'} src={filteredPokemonList[idx + offset].pokemonSpriteURL} alt={filteredPokemonList[idx + offset].pokemonName} key={filteredPokemonList[idx + offset].key} id={filteredPokemonList[idx + offset].key.toString()} onClick={handlePokemonClick}/>
             : null))}
         </div>
         <div className={`btnContainer btnContainer${(0, getIsMobile_1.default)()}`}>
