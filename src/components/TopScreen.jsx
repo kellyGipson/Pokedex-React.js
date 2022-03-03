@@ -12,9 +12,9 @@ const TopScreen = ({ handlePokemonClick, selectedPokemon, showShiny, setShowShin
     };
     return (<>
       <div className={`topScreen topScreen${(0, getIsMobile_1.default)()}`}>
-        <div className="topScreenContents">
+        <div className={`topScreenContents topScreenContents${(0, getIsMobile_1.default)()}`}>
           {selectedPokemon.map((idx) => (<div key={selectedPokemon[0].key} className="pokemonDetailsContainer">
-                <div className="pImg">
+                <div className="pImgContainer">
                   <img onClick={toggleShinySprite} className="pImg" style={{ display: (showShiny) ? "none" : "block" }} src={selectedPokemon[0].pokemonSpriteURL} alt=""/>
                   <img onClick={toggleShinySprite} className="pImg" style={{ display: (showShiny) ? "block" : "none" }} src={selectedPokemon[0].pokemonShinySpriteURL} alt=""/>
                   <p>Click for Shiny Sprite</p>

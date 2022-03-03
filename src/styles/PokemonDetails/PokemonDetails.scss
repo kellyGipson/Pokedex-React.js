@@ -8,11 +8,12 @@
 }
 
 .pokemonDetailsContainer {
-  font-size: 0.65em;
   height: 100%;
+  width: 100%;
+  font-size: 0.65em;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr fit-content 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 60% 40%;
   grid-template-areas: 
   "img name abilities size"
@@ -39,8 +40,6 @@
   text-align: center;
   width: fit-content;
   height: min-content;
-  padding: 4%;
-  padding-inline: 10%;
 }
 
 .pTypeOne, .pTypeTwo {
@@ -52,8 +51,12 @@
   padding: 4%;
 }
 
+.pImgContainer > p {
+  font-size: 64%;
+  margin: 0;
+}
+
 .pImg {
-  height: auto;
   width: 100%;
   grid-area: img;
   font-size: 0.5em;
