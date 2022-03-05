@@ -34,6 +34,7 @@ const pokemonJSON: Array<any> = require('./assets/pokemonList.json')
 // render the pokemon to the top screen
 
 const App = () => {
+  const [screenOn, setScreenOn] = useState(false)
   const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
   const [filteredPokemonList, setFilteredPokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonList)
   const [selectedPokemon, setSelectedPokemon]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
@@ -41,18 +42,19 @@ const App = () => {
   const [showShiny, setShowShiny] = useState(false)
   const [filter, setFilter] = useState('')
 
+  const handleScreenOn = () => {
+    setScreenOn(!screenOn)
+  }
+
   const handleFilterPokemon = (filterText: string) => {
     setFilteredPokemonList(pokemonList)
     //type in the field
     //return the pokemon that match the text field
     const filterPokemon = pokemonList.filter(pokemon => pokemon.pokemonName.startsWith(filterText.toLowerCase()))
-    console.log(filterText)
     if (filterPokemon.length % 6 !== 0) {
       //calc by how much its off
       const leftOver = filterPokemon.length % 6
-      console.log(filterPokemon.length)
       const objectsToInsert = 6 - leftOver
-      console.log(objectsToInsert)
       //insert blank objects
       const blankObjectsEmpty = []
       for (let i = 0; i < objectsToInsert; i++) {
@@ -79,10 +81,8 @@ const App = () => {
           pokemonWeight: null,
         })
       }
-      console.log(blankObjectsEmpty)
       const newFilteredPokemon = [...filterPokemon, ...blankObjectsEmpty]//existing list plus the blank objects
       setFilteredPokemonList(newFilteredPokemon)
-      console.log(newFilteredPokemon)
       return
     } else {
       setFilteredPokemonList(filterPokemon)
@@ -90,12 +90,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("Calling handleFilterPokemon")
     handleFilterPokemon("")
   },[])
-
-  // const addBlanksToList = (filterPokemon) => {
-  // }
 
   const toggleShinySprite = (e: React.MouseEventHandler<HTMLButtonElement>) => {
     setShowShiny(!showShiny)
@@ -110,7 +106,7 @@ const App = () => {
     setSelectedPokemon(filteredPokemonList.filter((pokemon, idx) => filteredPokemonList[idx].key === Number(e.target.id)))
     setShowShiny(false)
   }
-  /* if the length isn't divisible by 18 and the current offset is >= the next page, set the offset to length - 1 */
+  
   const handleClickUp = (e) => {
     if (offset > 0) {
       setOffset(offset - 6)
@@ -125,16 +121,18 @@ const App = () => {
 
   return (
     <div className="App">
-      <Device />
+      <Device screenOn={screenOn} handleScreenOn={handleScreenOn} />
       <div className='screenContainer'>
-        <TopScreen 
+        {(screenOn) && 
+        <>
+          <TopScreen 
           selectedPokemon={selectedPokemon}
           handlePokemonClick={handlePokemonClick} 
           showShiny={showShiny}
           setShowShiny={setShowShiny}
           toggleShinySprite={toggleShinySprite}
-        />
-        <BottomScreen 
+          />
+          <BottomScreen 
           offset={offset}
           filteredPokemonList={filteredPokemonList}
           handlePokemonClick={handlePokemonClick}
@@ -143,7 +141,9 @@ const App = () => {
           handleFilterPokemon={handleFilterPokemon}
           filter={filter}
           setFilter={setFilter}
-        />
+          />
+        </>
+        }
       </div>
     </div>
   );

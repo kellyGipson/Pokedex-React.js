@@ -49,7 +49,7 @@ export default function BottomScreen({
     <div className={`bottomScreen bottomScreen${useIsMobile()}`}>
       <div className="bottomScreenContents">
         <div className="searchContainer">
-          <input className="searchBox" type="text" onChange={(e) => {handleFilterPokemon(e.target.value)}}/>
+          <input className="searchBox" type="text" placeholder="Search" onChange={(e) => {handleFilterPokemon(e.target.value)}}/>
         </div>
         <div className={`pokemonContainer pokemonContainer${useIsMobile()}`}>
           {filteredPokemonList.map((pokemon, idx) => (

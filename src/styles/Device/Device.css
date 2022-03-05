@@ -3,16 +3,6 @@
      481px —  768px: iPads, Tablets
      769px — 1024px: Small screens, laptops
     1025px — 1200px: Desktops, large screens */
-.faPowerOffDevice {
-  z-index: 100;
-  fill: rgba(0, 0, 0, 0.3);
-}
-
-.faPowerOffDeviceVert {
-  transform: translate(43.6vw, -6vw);
-  transform: scale(1);
-}
-
 .pdText {
   font-weight: 1000;
   color: #812323;

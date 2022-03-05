@@ -2,7 +2,8 @@ import { useEffect, useState } from "react"
 
 const getIsMobile = () => window.innerWidth < window.innerHeight
 
-export default function useIsMobile() {
+
+function useIsMobile() {
   const [isMobile, setIsMobile] = useState(getIsMobile())
 
   useEffect(() => {
@@ -21,3 +22,5 @@ export default function useIsMobile() {
     return "Vert"
   } else return "Hori"
 }
+
+export default useIsMobile;

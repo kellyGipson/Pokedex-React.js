@@ -35,24 +35,25 @@ const pokemonJSON = require('./assets/pokemonList.json');
 // click the pokemon on the bottom screen
 // render the pokemon to the top screen
 const App = () => {
+    const [screenOn, setScreenOn] = (0, react_1.useState)(false);
     const [pokemonList] = (0, react_1.useState)(pokemonJSON);
     const [filteredPokemonList, setFilteredPokemonList] = (0, react_1.useState)(pokemonList);
     const [selectedPokemon, setSelectedPokemon] = (0, react_1.useState)([]);
     const [offset, setOffset] = (0, react_1.useState)(0);
     const [showShiny, setShowShiny] = (0, react_1.useState)(false);
     const [filter, setFilter] = (0, react_1.useState)('');
+    const handleScreenOn = () => {
+        setScreenOn(!screenOn);
+    };
     const handleFilterPokemon = (filterText) => {
         setFilteredPokemonList(pokemonList);
         //type in the field
         //return the pokemon that match the text field
         const filterPokemon = pokemonList.filter(pokemon => pokemon.pokemonName.startsWith(filterText.toLowerCase()));
-        console.log(filterText);
         if (filterPokemon.length % 6 !== 0) {
             //calc by how much its off
             const leftOver = filterPokemon.length % 6;
-            console.log(filterPokemon.length);
             const objectsToInsert = 6 - leftOver;
-            console.log(objectsToInsert);
             //insert blank objects
             const blankObjectsEmpty = [];
             for (let i = 0; i < objectsToInsert; i++) {
@@ -79,10 +80,8 @@ const App = () => {
                     pokemonWeight: null,
                 });
             }
-            console.log(blankObjectsEmpty);
             const newFilteredPokemon = [...filterPokemon, ...blankObjectsEmpty]; //existing list plus the blank objects
             setFilteredPokemonList(newFilteredPokemon);
-            console.log(newFilteredPokemon);
             return;
         }
         else {
@@ -90,11 +89,8 @@ const App = () => {
         }
     };
     (0, react_1.useEffect)(() => {
-        console.log("Calling handleFilterPokemon");
         handleFilterPokemon("");
     }, []);
-    // const addBlanksToList = (filterPokemon) => {
-    // }
     const toggleShinySprite = (e) => {
         setShowShiny(!showShiny);
     };
@@ -107,7 +103,6 @@ const App = () => {
         setSelectedPokemon(filteredPokemonList.filter((pokemon, idx) => filteredPokemonList[idx].key === Number(e.target.id)));
         setShowShiny(false);
     };
-    /* if the length isn't divisible by 18 and the current offset is >= the next page, set the offset to length - 1 */
     const handleClickUp = (e) => {
         if (offset > 0) {
             setOffset(offset - 6);
@@ -119,10 +114,13 @@ const App = () => {
         }
     };
     return (<div className="App">
-      <Device_1.default />
+      <Device_1.default screenOn={screenOn} handleScreenOn={handleScreenOn}/>
       <div className='screenContainer'>
-        <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick} showShiny={showShiny} setShowShiny={setShowShiny} toggleShinySprite={toggleShinySprite}/>
-        <BottomScreen_1.default offset={offset} filteredPokemonList={filteredPokemonList} handlePokemonClick={handlePokemonClick} handleClickUp={handleClickUp} handleClickDown={handleClickDown} handleFilterPokemon={handleFilterPokemon} filter={filter} setFilter={setFilter}/>
+        {(screenOn) &&
+            <>
+          <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick} showShiny={showShiny} setShowShiny={setShowShiny} toggleShinySprite={toggleShinySprite}/>
+          <BottomScreen_1.default offset={offset} filteredPokemonList={filteredPokemonList} handlePokemonClick={handlePokemonClick} handleClickUp={handleClickUp} handleClickDown={handleClickDown} handleFilterPokemon={handleFilterPokemon} filter={filter} setFilter={setFilter}/>
+        </>}
       </div>
     </div>);
 };

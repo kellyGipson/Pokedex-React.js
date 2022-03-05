@@ -9,7 +9,7 @@ function BottomScreen({ offset, handlePokemonClick, handleClickUp, handleClickDo
     return (<div className={`bottomScreen bottomScreen${(0, getIsMobile_1.default)()}`}>
       <div className="bottomScreenContents">
         <div className="searchContainer">
-          <input className="searchBox" type="text" onChange={(e) => { handleFilterPokemon(e.target.value); }}/>
+          <input className="searchBox" type="text" placeholder="Search" onChange={(e) => { handleFilterPokemon(e.target.value); }}/>
         </div>
         <div className={`pokemonContainer pokemonContainer${(0, getIsMobile_1.default)()}`}>
           {filteredPokemonList.map((pokemon, idx) => ((idx <= 17) ?

@@ -3,11 +3,11 @@
      769px — 1024px: Small screens, laptops
     1025px — 1200px: Desktops, large screens */
 
-$pbBodyMain: #a13333;
-$pbBodyDark: #af3535;
-$pbBodyText: #812323;
-$pbScreen: rgb(36, 36, 36);
-$pbBezel: rgb(46, 46, 46);
+$pdBodyMain: #a13333;
+$pdBodyDark: #af3535;
+$pdBodyText: #812323;
+$pdScreen: rgb(36, 36, 36);
+$pdBezel: rgb(46, 46, 46);
 
 @mixin roundCorners($radius: 20px) {
   border-top-left-radius: $radius;
@@ -21,19 +21,9 @@ $pbBezel: rgb(46, 46, 46);
   width: $width;
 }
 
-.faPowerOffDevice {
-  z-index: 100;
-  fill: rgba(0, 0, 0, 0.30);
-}
-
-.faPowerOffDeviceVert {
-  transform: translate(43.6vw, -6vw);
-  transform: scale(1);
-}
-
 .pdText {
   font-weight: 1000;
-  color: $pbBodyText;
+  color: $pdBodyText;
 }
 
 //==Vertical==
@@ -209,17 +199,17 @@ $pbBezel: rgb(46, 46, 46);
 }
 
 .pdBodyUpper, .pdBodyLower {
-  background-color: $pbBodyMain;
+  background-color: $pdBodyMain;
 }
 
 .pdBodyLowerDark {
-  background-color: $pbBodyDark;
+  background-color: $pdBodyDark;
 }
 
 .pdBezelUpper, .pdBezelLower {
-  background-color: $pbBezel;
+  background-color: $pdBezel;
 }
 
 .pdScreenUpper, .pdScreenLower {
-  background-color: $pbScreen;
+  background-color: $pdScreen;
 }
