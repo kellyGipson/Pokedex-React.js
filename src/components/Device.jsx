@@ -27,58 +27,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
-const styled_components_1 = __importDefault(require("styled-components"));
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
-const fi_1 = require("react-icons/fi");
+const StyledDevicePower_1 = require("../styles/Device/styled/StyledDevicePower/StyledDevicePower");
 require("../styles/Device/Device.css");
-const PowerIndicator = styled_components_1.default.div `
-  height: 1${props => props.vertical};
-  width: 1${props => props.vertical};
-  background: ${props => props.screenOn ? "#32a852" : "#3b3b3b"};
-  z-index: 300;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  transform: translateX(41.6${props => props.vertical});
-  `;
-const StyledFiPower = (0, styled_components_1.default)(fi_1.FiPower) `
-  width: 2.5${props => props.vertical};
-  height: auto;
-  stroke: #161616;
-  stroke-width: 3;
-  transform: translate(
-    0.7${props => props.vertical},
-    0.6${props => props.vertical}
-  )
-`;
-const PowerContainer = styled_components_1.default.div `
-  background: #363636;
-  width: 4${props => props.vertical};
-  height: 4${props => props.vertical};
-  transform: translateY(-4${props => props.vertical}) 
-  translateX(44.0${props => props.vertical});
-  z-index: 1;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
-  box-shadow: 
-    0.5${props => props.vertical} 
-    0.5${props => props.vertical} 
-    0.5${props => props.vertical} 
-    rgba(0, 0, 0, 0.30),
-    inset
-    0.5${props => props.vertical} 
-    0.5${props => props.vertical} 
-    0.5${props => props.vertical} 
-    rgba(255, 255, 255, 0.10),
-    inset
-    -0.5${props => props.vertical} 
-    -0.5${props => props.vertical} 
-    -0.5${props => props.vertical} 
-    rgba(0, 0, 0, 0.10);
-`;
 const Device = ({ screenOn, handleScreenOn }) => {
     // grabbing screen size and returning boolean
     const getIsMobile = () => window.innerWidth < window.innerHeight;
@@ -100,19 +51,23 @@ const Device = ({ screenOn, handleScreenOn }) => {
         };
     }, [isMobile]);
     // end of block
-    return (<div className={`pdContainer pdContainer${(0, getIsMobile_1.default)()}`}>
-      <div className={`pd pdBodyLower pdBodyLower${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdBodyLowerDark pdBodyLowerDark${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdBezelLower pdBezelLower${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdScreenLower pdScreenLower${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdBodyUpper pdBodyUpper${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdBezelUpper pdBezelUpper${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdScreenUpper pdScreenUpper${(0, getIsMobile_1.default)()}`}></div>
-      <div className={`pd pdText pdText${(0, getIsMobile_1.default)()}`}>PokeDex</div>
-      <PowerContainer vertical={vertical} className={'powerContainer'} onClick={handleScreenOn}>
-        <StyledFiPower vertical={vertical} className={`pd pdPower pdPower${(0, getIsMobile_1.default)()}`}/>
-      </PowerContainer>
-      <PowerIndicator vertical={vertical} screenOn={screenOn}/>
-    </div>);
+    return (<>
+			<StyledDevicePower_1.PdLower screenOn={screenOn} vertical={vertical} id={'PdLower'}>
+				<StyledDevicePower_1.PdBodyLower vertical={vertical} isMobile={isMobile} id={'PdBodyLower'}></StyledDevicePower_1.PdBodyLower>
+				<div className={`pd pdBodyLowerDark pdBodyLowerDark${(0, getIsMobile_1.default)()}`}></div>
+				<div className={`pd pdBezelLower pdBezelLower${(0, getIsMobile_1.default)()}`}></div>
+				<div className={`pd pdScreenLower pdScreenLower${(0, getIsMobile_1.default)()}`}></div>
+				<div className={`pd pdText pdText${(0, getIsMobile_1.default)()}`}>PokeDex</div>
+				<StyledDevicePower_1.PowerContainer vertical={vertical} id={'PowerContainer'} onClick={handleScreenOn}>
+					<StyledDevicePower_1.StyledFiPower vertical={vertical} id={'PdPower'}/>
+				</StyledDevicePower_1.PowerContainer>
+				<StyledDevicePower_1.PowerIndicator vertical={vertical} screenOn={screenOn}/>
+			</StyledDevicePower_1.PdLower>
+			<StyledDevicePower_1.PdUpper screenOn={screenOn} vertical={vertical}>
+				<div className={`pd pdBodyUpper pdBodyUpper${(0, getIsMobile_1.default)()}`}></div>
+				<div className={`pd pdBezelUpper pdBezelUpper${(0, getIsMobile_1.default)()}`}></div>
+				<div className={`pd pdScreenUpper pdScreenUpper${(0, getIsMobile_1.default)()}`}></div>
+			</StyledDevicePower_1.PdUpper>
+    </>);
 };
 exports.default = Device;

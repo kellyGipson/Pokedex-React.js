@@ -42,10 +42,19 @@ const App = () => {
     const [offset, setOffset] = (0, react_1.useState)(0);
     const [showShiny, setShowShiny] = (0, react_1.useState)(false);
     const [filter, setFilter] = (0, react_1.useState)('');
+    const globalReset = () => {
+        setFilteredPokemonList(pokemonList);
+        setSelectedPokemon([]);
+        setOffset(0);
+        setShowShiny(false);
+        setFilter('');
+    };
     const handleScreenOn = () => {
+        globalReset();
         setScreenOn(!screenOn);
     };
     const handleFilterPokemon = (filterText) => {
+        globalReset();
         setFilteredPokemonList(pokemonList);
         //type in the field
         //return the pokemon that match the text field
@@ -88,9 +97,6 @@ const App = () => {
             setFilteredPokemonList(filterPokemon);
         }
     };
-    (0, react_1.useEffect)(() => {
-        handleFilterPokemon("");
-    }, []);
     const toggleShinySprite = (e) => {
         setShowShiny(!showShiny);
     };

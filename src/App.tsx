@@ -34,19 +34,29 @@ const pokemonJSON: Array<any> = require('./assets/pokemonList.json')
 // render the pokemon to the top screen
 
 const App = () => {
-  const [screenOn, setScreenOn] = useState(false)
-  const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
+	const [screenOn, setScreenOn] = useState(false)
+	const [pokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonJSON)
   const [filteredPokemonList, setFilteredPokemonList]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState(pokemonList)
   const [selectedPokemon, setSelectedPokemon]:[pokemonListType, React.Dispatch<React.SetStateAction<any[]>>] = useState([])
   const [offset, setOffset] = useState(0)
   const [showShiny, setShowShiny] = useState(false)
   const [filter, setFilter] = useState('')
 
+	const globalReset = () => {
+		setFilteredPokemonList(pokemonList)
+		setSelectedPokemon([])
+		setOffset(0)
+		setShowShiny(false)
+		setFilter('')
+	}
+
   const handleScreenOn = () => {
+		globalReset()
     setScreenOn(!screenOn)
   }
 
   const handleFilterPokemon = (filterText: string) => {
+		globalReset()
     setFilteredPokemonList(pokemonList)
     //type in the field
     //return the pokemon that match the text field
@@ -88,10 +98,6 @@ const App = () => {
       setFilteredPokemonList(filterPokemon)
     }
   }
-
-  useEffect(() => {
-    handleFilterPokemon("")
-  },[])
 
   const toggleShinySprite = (e: React.MouseEventHandler<HTMLButtonElement>) => {
     setShowShiny(!showShiny)
