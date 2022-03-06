@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import './styles/App/App.css';
 import Device from './components/Device';
 import BottomScreen from './components/BottomScreen';
 import TopScreen from './components/TopScreen'
+import useIsMobile from './hooks/getIsMobile'
 
 type pokemonListType = {
     "key": number,
@@ -41,6 +42,16 @@ const App = () => {
   const [offset, setOffset] = useState(0)
   const [showShiny, setShowShiny] = useState(false)
   const [filter, setFilter] = useState('')
+	const getIsMobile = () => window.innerWidth < window.innerHeight
+  const [isMobile, setIsMobile] = useState(getIsMobile)
+  const [vertical, setVertical] = useState(isMobile ? 'vw' : 'vh')
+	const [placeholder, setPlaceholder] = useState('')
+	const [topFromValue, setTopFromValue] = useState('40.5')
+	const [topToValue, setTopToValue] = useState('40.5')
+	const [bottomFromValue, setBottomFromValue] = useState('5')
+	const [bottomToValue, setBottomToValue] = useState('5')
+	const [animationRan, setAnimationRan] = useState(false)
+//top 20, bottom 25
 
 	const globalReset = () => {
 		setFilteredPokemonList(pokemonList)
@@ -50,9 +61,30 @@ const App = () => {
 		setFilter('')
 	}
 
+	const handleAnimationOn = () => {
+		globalReset()
+		if(topToValue === '20') {
+			setTopToValue('40.5')
+			setBottomToValue('5')
+		} else {
+			setTopToValue('20')
+			setBottomToValue('25')
+		}
+	}
+
+	const handleAnimationEnd = () => {
+		if(topToValue !== '20') {
+			setTopFromValue('40.5')
+			setBottomFromValue('5')
+		} else {
+			setAnimationRan(true)
+			setTopFromValue('20')
+			setBottomFromValue('25')
+		}
+	}
+	
   const handleScreenOn = () => {
 		globalReset()
-    setScreenOn(!screenOn)
   }
 
   const handleFilterPokemon = (filterText: string) => {
@@ -127,8 +159,30 @@ const App = () => {
 
   return (
     <div className="App">
-      <Device screenOn={screenOn} handleScreenOn={handleScreenOn} />
-      <div className='screenContainer'>
+      <Device 
+				screenOn={screenOn} 
+				setScreenOn={setScreenOn}
+				handleScreenOn={handleScreenOn} 
+				handleAnimationOn={handleAnimationOn}
+				handleAnimationEnd={handleAnimationEnd}
+				topFromValue={topFromValue}
+				setTopFromValue={setTopFromValue}
+				topToValue={topToValue}
+				setTopToValue={setTopToValue}
+				bottomFromValue={bottomFromValue}
+				setBottomFromValue={setBottomFromValue}
+				bottomToValue={bottomToValue}
+				setBottomToValue={setBottomToValue}
+				getIsMobile={getIsMobile}
+				isMobile={isMobile}
+				vertical={vertical}
+				setIsMobile={setIsMobile}
+				setVertical={setVertical}
+				placeholder={placeholder}
+				setPlaceholder={setPlaceholder}
+				animationRan={animationRan}
+			/>
+      <div className={'screenContainer'}>
         {(screenOn) && 
         <>
           <TopScreen 
@@ -151,6 +205,7 @@ const App = () => {
         </>
         }
       </div>
+			<div className='credits'>Crafted from scratch by Kelly Gipson. 2022</div>
     </div>
   );
 }

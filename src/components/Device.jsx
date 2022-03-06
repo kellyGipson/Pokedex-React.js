@@ -27,17 +27,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
+const styled_components_1 = require("styled-components");
 const getIsMobile_1 = __importDefault(require("../hooks/getIsMobile"));
-const StyledDevicePower_1 = require("../styles/Device/styled/StyledDevicePower/StyledDevicePower");
-require("../styles/Device/Device.css");
-const Device = ({ screenOn, handleScreenOn }) => {
+const StyledDevicePower_1 = require("../styles/Device/StyledDevicePower/StyledDevicePower");
+const StyledDeviceLower_1 = require("../styles/Device/StyledDeviceLower/StyledDeviceLower");
+const StyledDeviceUpper_1 = require("../styles/Device/StyledDeviceUpper/StyledDeviceUpper");
+const Device = ({ screenOn, setScreenOn, handleScreenOn, handleAnimationOn, handleAnimationEnd, topFromValue, setTopFromValue, topToValue, setTopToValue, bottomFromValue, setBottomFromValue, bottomToValue, setBottomToValue, getIsMobile, isMobile, setIsMobile, vertical, setVertical, placeholder, setPlaceholder, animationRan, }) => {
     // grabbing screen size and returning boolean
-    const getIsMobile = () => window.innerWidth < window.innerHeight;
-    const [isMobile, setIsMobile] = (0, react_1.useState)(getIsMobile());
-    const [vertical, setVertical] = (0, react_1.useState)(isMobile ? "vw" : "vh");
     (0, react_1.useEffect)(() => {
         const onResize = () => {
-            setIsMobile(getIsMobile());
+            setIsMobile(getIsMobile);
             if (isMobile) {
                 setVertical("vw");
             }
@@ -49,25 +48,50 @@ const Device = ({ screenOn, handleScreenOn }) => {
         return () => {
             window.removeEventListener("resize", onResize);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMobile]);
     // end of block
-    return (<>
-			<StyledDevicePower_1.PdLower screenOn={screenOn} vertical={vertical} id={'PdLower'}>
-				<StyledDevicePower_1.PdBodyLower vertical={vertical} isMobile={isMobile} id={'PdBodyLower'}></StyledDevicePower_1.PdBodyLower>
-				<div className={`pd pdBodyLowerDark pdBodyLowerDark${(0, getIsMobile_1.default)()}`}></div>
-				<div className={`pd pdBezelLower pdBezelLower${(0, getIsMobile_1.default)()}`}></div>
-				<div className={`pd pdScreenLower pdScreenLower${(0, getIsMobile_1.default)()}`}></div>
-				<div className={`pd pdText pdText${(0, getIsMobile_1.default)()}`}>PokeDex</div>
-				<StyledDevicePower_1.PowerContainer vertical={vertical} id={'PowerContainer'} onClick={handleScreenOn}>
+    //20
+    const OnAnimationTop = (topFromValue, topToValue) => (0, styled_components_1.keyframes) `
+	0%{
+		transform: translateY(${topFromValue}${vertical});
+	}
+	100%{
+		transform: translateY(${topToValue}${vertical});
+	}
+	`;
+    //25
+    const OnAnimationBottom = (bottomFromValue, bottomToValue) => (0, styled_components_1.keyframes) `
+		0% {
+			transform: translateY(${bottomFromValue}${vertical})
+		}
+		100% {
+			transform: translateY(${bottomToValue}${vertical})
+		}
+	`;
+    return (<StyledDevicePower_1.DeviceContainer vertical={vertical} id={'DeviceContainer'}>
+			<StyledDeviceLower_1.PdLower animation={() => OnAnimationBottom(bottomFromValue, bottomToValue)} onAnimationEnd={() => {
+            handleAnimationEnd();
+        }} vertical={vertical} id={'PdLower'}>
+				<StyledDeviceLower_1.PdBodyLower vertical={vertical} id={'PdBodyLower'}/>
+				<StyledDeviceLower_1.PdBodyLowerDark vertical={vertical} id={`PdBodyLowerDark`}/>
+				<StyledDeviceLower_1.PdBezelLower vertical={vertical} id={`PdBezelLower`}/>
+				<StyledDeviceLower_1.PdScreenLower vertical={vertical} className={`pd pdScreenLower pdScreenLower${(0, getIsMobile_1.default)()}`}/>
+				<StyledDeviceLower_1.PdText vertical={vertical} className={`pd pdText pdText${(0, getIsMobile_1.default)()}`}>PokeDex</StyledDeviceLower_1.PdText>
+				<StyledDevicePower_1.PowerContainer vertical={vertical} id={'PowerContainer'} onClick={() => {
+            handleAnimationOn();
+            (!screenOn) ? setTimeout(() => setScreenOn(!screenOn), 700)
+                : setScreenOn(!screenOn);
+        }}>
 					<StyledDevicePower_1.StyledFiPower vertical={vertical} id={'PdPower'}/>
 				</StyledDevicePower_1.PowerContainer>
 				<StyledDevicePower_1.PowerIndicator vertical={vertical} screenOn={screenOn}/>
-			</StyledDevicePower_1.PdLower>
-			<StyledDevicePower_1.PdUpper screenOn={screenOn} vertical={vertical}>
-				<div className={`pd pdBodyUpper pdBodyUpper${(0, getIsMobile_1.default)()}`}></div>
-				<div className={`pd pdBezelUpper pdBezelUpper${(0, getIsMobile_1.default)()}`}></div>
-				<div className={`pd pdScreenUpper pdScreenUpper${(0, getIsMobile_1.default)()}`}></div>
-			</StyledDevicePower_1.PdUpper>
-    </>);
+			</StyledDeviceLower_1.PdLower>
+			<StyledDeviceUpper_1.PdUpper animation={() => OnAnimationTop(topFromValue, topToValue)} screenOn={screenOn} vertical={vertical} id={'PdUpper'}>
+				<StyledDeviceUpper_1.PdBodyUpper vertical={vertical} id={`PdBodyUpper`}/>
+				<StyledDeviceUpper_1.PdBezelUpper vertical={vertical} id={`PdBezelUpper`}/>
+				<StyledDeviceUpper_1.PdScreenUpper vertical={vertical} id={`PdScreenUpper`}/>
+			</StyledDeviceUpper_1.PdUpper>
+    </StyledDevicePower_1.DeviceContainer>);
 };
 exports.default = Device;

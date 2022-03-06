@@ -6,8 +6,16 @@
 
 .App {
   background-color: #404040;
-  position: relative;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.credits {
+  color: black;
+  justify-self: end;
+  align-self: flex-end;
 }
 
 /*# sourceMappingURL=App.css.map */

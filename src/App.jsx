@@ -42,6 +42,16 @@ const App = () => {
     const [offset, setOffset] = (0, react_1.useState)(0);
     const [showShiny, setShowShiny] = (0, react_1.useState)(false);
     const [filter, setFilter] = (0, react_1.useState)('');
+    const getIsMobile = () => window.innerWidth < window.innerHeight;
+    const [isMobile, setIsMobile] = (0, react_1.useState)(getIsMobile);
+    const [vertical, setVertical] = (0, react_1.useState)(isMobile ? 'vw' : 'vh');
+    const [placeholder, setPlaceholder] = (0, react_1.useState)('');
+    const [topFromValue, setTopFromValue] = (0, react_1.useState)('40.5');
+    const [topToValue, setTopToValue] = (0, react_1.useState)('40.5');
+    const [bottomFromValue, setBottomFromValue] = (0, react_1.useState)('5');
+    const [bottomToValue, setBottomToValue] = (0, react_1.useState)('5');
+    const [animationRan, setAnimationRan] = (0, react_1.useState)(false);
+    //top 20, bottom 25
     const globalReset = () => {
         setFilteredPokemonList(pokemonList);
         setSelectedPokemon([]);
@@ -49,9 +59,30 @@ const App = () => {
         setShowShiny(false);
         setFilter('');
     };
+    const handleAnimationOn = () => {
+        globalReset();
+        if (topToValue === '20') {
+            setTopToValue('40.5');
+            setBottomToValue('5');
+        }
+        else {
+            setTopToValue('20');
+            setBottomToValue('25');
+        }
+    };
+    const handleAnimationEnd = () => {
+        if (topToValue !== '20') {
+            setTopFromValue('40.5');
+            setBottomFromValue('5');
+        }
+        else {
+            setAnimationRan(true);
+            setTopFromValue('20');
+            setBottomFromValue('25');
+        }
+    };
     const handleScreenOn = () => {
         globalReset();
-        setScreenOn(!screenOn);
     };
     const handleFilterPokemon = (filterText) => {
         globalReset();
@@ -120,14 +151,15 @@ const App = () => {
         }
     };
     return (<div className="App">
-      <Device_1.default screenOn={screenOn} handleScreenOn={handleScreenOn}/>
-      <div className='screenContainer'>
+      <Device_1.default screenOn={screenOn} setScreenOn={setScreenOn} handleScreenOn={handleScreenOn} handleAnimationOn={handleAnimationOn} handleAnimationEnd={handleAnimationEnd} topFromValue={topFromValue} setTopFromValue={setTopFromValue} topToValue={topToValue} setTopToValue={setTopToValue} bottomFromValue={bottomFromValue} setBottomFromValue={setBottomFromValue} bottomToValue={bottomToValue} setBottomToValue={setBottomToValue} getIsMobile={getIsMobile} isMobile={isMobile} vertical={vertical} setIsMobile={setIsMobile} setVertical={setVertical} placeholder={placeholder} setPlaceholder={setPlaceholder} animationRan={animationRan}/>
+      <div className={'screenContainer'}>
         {(screenOn) &&
             <>
           <TopScreen_1.default selectedPokemon={selectedPokemon} handlePokemonClick={handlePokemonClick} showShiny={showShiny} setShowShiny={setShowShiny} toggleShinySprite={toggleShinySprite}/>
           <BottomScreen_1.default offset={offset} filteredPokemonList={filteredPokemonList} handlePokemonClick={handlePokemonClick} handleClickUp={handleClickUp} handleClickDown={handleClickDown} handleFilterPokemon={handleFilterPokemon} filter={filter} setFilter={setFilter}/>
         </>}
       </div>
+			<div className='credits'>Crafted from scratch by Kelly Gipson. 2022</div>
     </div>);
 };
 exports.default = App;

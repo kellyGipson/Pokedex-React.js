@@ -10,7 +10,14 @@ $textcolor: #ddd;
 
 .App {
   background-color: $bgcolor;
-  position: relative;
   height: 100vh;
-  // z-index: -100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.credits {
+	color: black;
+	justify-self: end;
+	align-self: flex-end;
 }
