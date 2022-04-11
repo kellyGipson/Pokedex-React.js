@@ -1,6 +1,7 @@
 # PokeDex App
 
-You can view the live project at: [https://kellygipson.github.io/Pokedex-React.js/](https://kellygipson.github.io/Pokedex-React.js/)
+You can view the live project at: [Pokedex App](https://kellygipson.github.io/Pokedex-React-Build/)
+
 
 This web app was created with React.js, SASS, and Typescript.
 
